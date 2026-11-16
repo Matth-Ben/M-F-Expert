@@ -1,0 +1,22 @@
+/* Text Animations Styles */
+
+/* Prevent layout shift during text split */
+[data-text-split] {
+    overflow: hidden;
+}
+
+/* Base styles for split elements */
+.split-char,
+.split-word,
+.split-line {
+    display: inline-block;
+}
+
+/* Ensure proper spacing */
+.split-word {
+    /* margin-right: 0.25em; */
+}
+
+.split-line {
+    display: block;
+}

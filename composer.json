@@ -1,0 +1,44 @@
+{
+  "name": "wp-gutenberg/site",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "johnpbloch/wordpress-core": "^6.6",
+    "johnpbloch/wordpress-core-installer": "^2.0",
+    "composer/installers": "^2.2",
+    "oomphinc/composer-installers-extender": "^2.0",
+    "wpackagist-plugin/matomo": "^5.6",
+    "wpackagist-plugin/relevanssi": "^4.26",
+    "wpackagist-plugin/simple-history": "^5.22",
+    "wpackagist-plugin/wordfence": "^8.1",
+    "wpackagist-plugin/wp-health": "^2.20",
+    "wpackagist-plugin/wp-seopress": "^10.4"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "extra": {
+    "wordpress-install-dir": "public/wordpress",
+    "installer-paths": {
+      "public/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "public/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "public/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "oomphinc/composer-installers-extender": true,
+      "johnpbloch/wordpress-core-installer": true
+    }
+  }
+}

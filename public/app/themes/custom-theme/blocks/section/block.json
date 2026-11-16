@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/section",
+	"version": "1.0.0",
+	"title": "Section",
+	"category": "wpg",
+	"icon": "align-wide",
+	"description": "Conteneur pleine largeur : fond, espacements et largeur de contenu.",
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"width": { "type": "string", "enum": ["container", "narrow"], "default": "container" },
+		"align": { "type": "string", "default": "full" },
+		"style": {
+			"type": "object",
+			"default": {
+				"spacing": { "padding": { "top": "var:preset|spacing|md", "bottom": "var:preset|spacing|md" } }
+			}
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true,
+		"color": { "background": true, "text": true, "link": false },
+		"spacing": { "padding": ["top", "bottom"] }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

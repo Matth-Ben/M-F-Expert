@@ -1,0 +1,17 @@
+.grid-debugger-overlay {
+    @apply fixed inset-0 pointer-events-none;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+}
+
+.grid-debugger-container {
+    @apply container h-full;
+    @apply grid gap-5;
+}
+
+.grid-debugger-col {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 1px solid rgba(255, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 0, 0, 0.2);
+}

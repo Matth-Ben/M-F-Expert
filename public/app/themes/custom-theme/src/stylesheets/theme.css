@@ -1,0 +1,45 @@
+/*
+ * Design tokens.
+ *
+ * Colors & spacing are defined ONCE in theme.json (so the editor offers them to the client)
+ * and exposed to Tailwind here via the CSS variables WordPress generates.
+ * Add a color in theme.json → map it below → `bg-primary`, `text-primary`… everywhere.
+ */
+@theme inline {
+	--color-*: initial;
+	--color-black: var(--wp--preset--color--black);
+	--color-white: var(--wp--preset--color--white);
+	--color-light: var(--wp--preset--color--light);
+	--color-primary: var(--wp--preset--color--primary);
+
+	--spacing-section-sm: var(--wp--preset--spacing--sm);
+	--spacing-section-md: var(--wp--preset--spacing--md);
+	--spacing-section-lg: var(--wp--preset--spacing--lg);
+}
+
+@theme {
+	--default-font-family: "FT Kunst Grotesk", sans-serif;
+
+	/* Typographies — class `.h1` in components/typographies.css */
+	--text-*: initial;
+
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-base: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+
+	--text-h1-desktop: 3.75rem;
+	--text-h1-desktop--font-weight: 400;
+	--text-h1-desktop--line-height: 1;
+
+	--text-h1-mobile: 2.5rem;
+	--text-h1-mobile--font-weight: 400;
+	--text-h1-mobile--line-height: 1.2;
+
+	--text-h2-desktop: 2.5rem;
+	--text-h2-desktop--line-height: 1.1;
+
+	--text-h2-mobile: 1.875rem;
+	--text-h2-mobile--line-height: 1.2;
+}

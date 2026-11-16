@@ -1,0 +1,10 @@
+# web/.htaccess
+RewriteEngine On
+
+# Si tu veux que /wp-admin et /wp-login restent corrects :
+RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
+
+# WordPress
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]

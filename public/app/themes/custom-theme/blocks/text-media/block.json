@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/text-media",
+	"version": "1.0.0",
+	"title": "Texte + image",
+	"category": "wpg",
+	"icon": "align-pull-left",
+	"description": "Image et contenu côte à côte, image à gauche ou à droite.",
+	"keywords": ["media", "image", "texte"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"mediaId": { "type": "number" },
+		"mediaPosition": { "type": "string", "enum": ["left", "right"], "default": "left" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true,
+		"color": { "background": true, "text": true, "link": false }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

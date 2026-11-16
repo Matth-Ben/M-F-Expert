@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/stat",
+	"version": "1.0.0",
+	"title": "Chiffre",
+	"category": "wpg",
+	"icon": "editor-ol",
+	"description": "Un chiffre clé (dans un bloc Chiffres clés).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/stats"],
+	"attributes": {
+		"value": { "type": "number", "default": 0 },
+		"prefix": { "type": "string", "default": "" },
+		"suffix": { "type": "string", "default": "" },
+		"label": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,396 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Gutenberg 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/custom-theme\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-16T16:13:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: wp-gutenberg\n"
+
+#. Theme Name of the theme
+msgid "WP Gutenberg"
+msgstr "WP Gutenberg"
+
+#. Description of the theme
+msgid "Starter theme — native Gutenberg blocks, PHP templates, Vite + Tailwind."
+msgstr "Thème de démarrage — blocs Gutenberg natifs, templates PHP, Vite + Tailwind."
+
+#: 404.php:11
+msgid "404 Error"
+msgstr "Erreur 404"
+
+#: 404.php:12
+msgid "That page can’t be found."
+msgstr "Cette page est introuvable."
+
+#: 404.php:13
+msgid "Back to home page"
+msgstr "Retour à l’accueil"
+
+#: config/socials.php:12
+msgid "Facebook"
+msgstr "Facebook"
+
+#: config/socials.php:16
+msgid "Instagram"
+msgstr "Instagram"
+
+#: config/socials.php:19
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: config/socials.php:23
+msgid "Vimeo"
+msgstr "Vimeo"
+
+#: config/socials.php:26
+msgid "X (Twitter)"
+msgstr "X (Twitter)"
+
+#: config/socials.php:30
+msgid "YouTube"
+msgstr "YouTube"
+
+#: header.php:22
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+#: includes/Admin/Socials.php:34
+#: includes/Admin/Socials.php:35
+msgid "Socials"
+msgstr "Réseaux sociaux"
+
+#: includes/Core/Setup.php:68
+msgid "Main Menu"
+msgstr "Menu principal"
+
+#: includes/Core/Setup.php:69
+msgid "Secondary Menu"
+msgstr "Menu secondaire"
+
+#: includes/Core/Setup.php:70
+msgid "Footer Menu"
+msgstr "Menu du pied de page"
+
+#: includes/Core/Setup.php:71
+msgid "Legals Menu"
+msgstr "Menu légal"
+
+#: includes/Editor/Blocks.php:66
+msgid "Site blocks"
+msgstr "Blocs du site"
+
+#: includes/Fragments/Rest.php:127
+msgid "Invalid origin."
+msgstr "Origine invalide."
+
+#: includes/Fragments/Rest.php:137
+msgid "Invalid referer."
+msgstr "Référent invalide."
+
+#. translators: %s: search query.
+#: index.php:19
+msgid "Search results for “%s”"
+msgstr "Résultats de recherche pour « %s »"
+
+#: index.php:23
+msgid "News"
+msgstr "Actualités"
+
+#: index.php:44
+msgid "Previous"
+msgstr "Précédent"
+
+#: index.php:45
+msgid "Next"
+msgstr "Suivant"
+
+#: index.php:50
+msgid "No posts found."
+msgstr "Aucun article trouvé."
+
+#: parts/fragments/panels/filters.php:14
+msgid "Filters"
+msgstr "Filtres"
+
+#: parts/fragments/panels/filters.php:19
+msgid "Category"
+msgstr "Catégorie"
+
+#: parts/fragments/panels/filters.php:21
+msgid "All categories"
+msgstr "Toutes les catégories"
+
+#: parts/fragments/panels/filters.php:29
+msgid "Search"
+msgstr "Rechercher"
+
+#: parts/fragments/panels/filters.php:33
+msgid "Apply"
+msgstr "Appliquer"
+
+#: parts/fragments/panels/menu.php:12
+msgid "Panel menu"
+msgstr "Menu du panneau"
+
+#: parts/fragments/panels/menu.php:14
+#: parts/site-header.php:17
+msgid "Menu"
+msgstr "Menu"
+
+#: parts/site-header.php:16
+msgid "Open menu"
+msgstr "Ouvrir le menu"
+
+#: patterns/home.php
+msgctxt "Pattern title"
+msgid "Page d'accueil"
+msgstr "Page d'accueil"
+
+#: patterns/home.php
+msgctxt "Pattern description"
+msgid "Hero + texte/image + chiffres clés."
+msgstr "Hero + texte/image + chiffres clés."
+
+#: build/hero/index.js:1
+#: build/text-media/index.js:1
+msgid "Image"
+msgstr "Image"
+
+#: build/hero/index.js:1
+#: build/text-media/index.js:1
+msgid "Replace image"
+msgstr "Remplacer l’image"
+
+#: build/hero/index.js:1
+#: build/text-media/index.js:1
+msgid "Select image"
+msgstr "Choisir une image"
+
+#: build/hero/index.js:1
+#: build/text-media/index.js:1
+msgid "Remove image"
+msgstr "Retirer l’image"
+
+#: build/hero/index.js:1
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: build/hero/index.js:1
+msgid "Animations"
+msgstr "Animations"
+
+#: build/hero/index.js:1
+msgid "Image parallax"
+msgstr "Parallaxe de l’image"
+
+#: build/hero/index.js:1
+msgid "Animated title"
+msgstr "Titre animé"
+
+#: build/hero/index.js:1
+msgid "Hero title…"
+msgstr "Titre du hero…"
+
+#: build/hero/index.js:1
+msgid "Introduction text…"
+msgstr "Texte d’introduction…"
+
+#: build/section/index.js:1
+msgid "Layout"
+msgstr "Mise en page"
+
+#: build/section/index.js:1
+msgid "Content width"
+msgstr "Largeur du contenu"
+
+#: build/section/index.js:1
+msgid "Container"
+msgstr "Conteneur"
+
+#: build/section/index.js:1
+msgid "Narrow"
+msgstr "Étroit"
+
+#: build/stat/index.js:1
+msgid "Number"
+msgstr "Chiffre"
+
+#: build/stat/index.js:1
+msgid "Value"
+msgstr "Valeur"
+
+#: build/stat/index.js:1
+msgid "Prefix"
+msgstr "Préfixe"
+
+#: build/stat/index.js:1
+msgid "Suffix"
+msgstr "Suffixe"
+
+#: build/stat/index.js:1
+msgid "Label…"
+msgstr "Libellé…"
+
+#: build/text-media/index.js:1
+msgid "Title"
+msgstr "Titre"
+
+#: build/text-media/index.js:1
+msgid "Text…"
+msgstr "Texte…"
+
+#: build/text-media/index.js:1
+msgid "Flip image side"
+msgstr "Inverser le côté de l’image"
+
+#: build/_editor/index.js:1
+msgid "Arrow"
+msgstr "Flèche"
+
+#: build/hero/block.json
+msgctxt "block title"
+msgid "Hero"
+msgstr "Hero"
+
+#: build/hero/block.json
+msgctxt "block description"
+msgid "Grand visuel d'en-tête avec titre, texte et boutons."
+msgstr "Grand visuel d'en-tête avec titre, texte et boutons."
+
+#: build/hero/block.json
+msgctxt "block keyword"
+msgid "header"
+msgstr "en-tête"
+
+#: build/hero/block.json
+msgctxt "block keyword"
+msgid "banner"
+msgstr "bannière"
+
+#: build/hero/block.json
+msgctxt "block keyword"
+msgid "bannière"
+msgstr "bannière"
+
+#: build/hero/block.json
+msgctxt "block keyword"
+msgid "en-tête"
+msgstr "en-tête"
+
+#: build/section/block.json
+msgctxt "block title"
+msgid "Section"
+msgstr "Section"
+
+#: build/section/block.json
+msgctxt "block description"
+msgid "Conteneur pleine largeur : fond, espacements et largeur de contenu."
+msgstr "Conteneur pleine largeur : fond, espacements et largeur de contenu."
+
+#: build/stat/block.json
+msgctxt "block title"
+msgid "Chiffre"
+msgstr "Chiffre"
+
+#: build/stat/block.json
+msgctxt "block description"
+msgid "Un chiffre clé (dans un bloc Chiffres clés)."
+msgstr "Un chiffre clé (dans un bloc Chiffres clés)."
+
+#: build/stats/block.json
+msgctxt "block title"
+msgid "Chiffres clés"
+msgstr "Chiffres clés"
+
+#: build/stats/block.json
+msgctxt "block description"
+msgid "Grille de chiffres animés au scroll."
+msgstr "Grille de chiffres animés au scroll."
+
+#: build/stats/block.json
+msgctxt "block keyword"
+msgid "chiffres"
+msgstr "chiffres"
+
+#: build/stats/block.json
+msgctxt "block keyword"
+msgid "nombres"
+msgstr "nombres"
+
+#: build/stats/block.json
+msgctxt "block keyword"
+msgid "compteur"
+msgstr "compteur"
+
+#: build/stats/block.json
+msgctxt "block keyword"
+msgid "stats"
+msgstr "stats"
+
+#: build/text-media/block.json
+msgctxt "block title"
+msgid "Texte + image"
+msgstr "Texte + image"
+
+#: build/text-media/block.json
+msgctxt "block description"
+msgid "Image et contenu côte à côte, image à gauche ou à droite."
+msgstr "Image et contenu côte à côte, image à gauche ou à droite."
+
+#: build/text-media/block.json
+msgctxt "block keyword"
+msgid "media"
+msgstr "média"
+
+#: build/text-media/block.json
+msgctxt "block keyword"
+msgid "image"
+msgstr "image"
+
+#: build/text-media/block.json
+msgctxt "block keyword"
+msgid "texte"
+msgstr "texte"
+
+#: theme.json
+msgctxt "Color name"
+msgid "Noir"
+msgstr "Noir"
+
+#: theme.json
+msgctxt "Color name"
+msgid "Blanc"
+msgstr "Blanc"
+
+#: theme.json
+msgctxt "Color name"
+msgid "Gris clair"
+msgstr "Gris clair"
+
+#: theme.json
+msgctxt "Color name"
+msgid "Primaire"
+msgstr "Primaire"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "S"
+msgstr "S"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "M"
+msgstr "M"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "L"
+msgstr "L"

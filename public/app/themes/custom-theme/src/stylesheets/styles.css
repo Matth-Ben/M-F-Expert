@@ -1,0 +1,36 @@
+/*
+ * Tailwind is imported in pieces so that utilities are NOT inside a cascade layer:
+ * WordPress' own CSS (global styles, core blocks) is unlayered, and unlayered CSS
+ * always beats layered CSS. Unlayered utilities keep `mt-0`, `text-white`… winning.
+ */
+@layer theme, base, components;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+/* Classes used in PHP templates, block render.php and editor JSX. */
+@source "../../*.php";
+@source "../../parts";
+@source "../../blocks";
+
+@import "./theme.css";
+
+/* Base */
+@import "./base/base.css";
+@import "./base/font-face.css";
+@import "./base/wordpress.css";
+
+/* Utilities */
+@import "./utilities/container.css";
+@import "./utilities/scrollbar-hidden.css";
+
+/* Components */
+@import "./components/advancedform.css";
+@import "./components/button.css";
+@import "./components/typographies.css";
+@import "./components/content.css";
+@import "./components/panel.css";
+@import "./components/grid-debugger.css";
+@import "./components/barba.css";
+@import "./components/lenis.css";
+@import "./components/text-animations.css";

@@ -1,0 +1,18 @@
+/vendor/
+/public/wordpress/
+/public/app/languages/
+/public/app/plugins/
+/public/app/uploads/
+/.env
+auth.json
+/public/app/mu-plugins/InitUmbrella.php
+# WordPress runtime
+/public/app/debug.log
+/public/app/cache/
+/public/app/upgrade/
+/public/app/upgrade-temp-backup/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/

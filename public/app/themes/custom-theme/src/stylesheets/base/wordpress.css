@@ -1,0 +1,15 @@
+/* WordPress core markup helpers (moved from the old style.css). */
+@layer base {
+	.screen-reader-text {
+		@apply sr-only;
+	}
+
+	.screen-reader-text:focus,
+	.screen-reader-shortcut:focus {
+		@apply not-sr-only fixed top-2 left-2 z-[100000] bg-white px-6 py-4 text-black;
+	}
+
+	.screen-reader-shortcut {
+		@apply sr-only;
+	}
+}

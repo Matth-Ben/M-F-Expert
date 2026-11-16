@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/stats",
+	"version": "1.0.0",
+	"title": "Chiffres clés",
+	"category": "wpg",
+	"icon": "chart-bar",
+	"description": "Grille de chiffres animés au scroll.",
+	"keywords": ["chiffres", "nombres", "compteur", "stats"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/stat"],
+	"attributes": {
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true,
+		"color": { "background": true, "text": true, "link": false }
+	},
+	"editorScript": "file:./index.js",
+	"viewScriptModule": "file:./view.js",
+	"render": "file:./render.php"
+}

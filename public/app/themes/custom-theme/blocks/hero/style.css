@@ -1,0 +1,13 @@
+/*
+ * Block-specific CSS: only loaded on pages containing the block (front + editor).
+ * Prefer Tailwind classes in the markup; use this file for what utilities can't express.
+ * Theme tokens are available as CSS variables (var(--color-primary), var(--wp--preset--…)).
+ */
+.wpg-hero {
+	min-height: 80svh;
+}
+
+.wpg-hero .wp-block-button__link {
+	background-color: var(--wp--preset--color--white);
+	color: var(--wp--preset--color--black);
+}

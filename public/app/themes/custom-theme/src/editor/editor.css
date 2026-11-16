@@ -1,0 +1,14 @@
+/*
+ * Editor-canvas-only adjustments (loaded after styles.css inside the editor iframe).
+ * Keep this file tiny: the goal is for the editor to look exactly like the front.
+ */
+
+/* Text-split animations hide text until JS runs — JS never runs in the canvas. */
+[data-text-split] {
+	overflow: visible;
+}
+
+/* Header is absolute on the front; leave room for the first block in the editor. */
+.editor-styles-wrapper .is-root-container {
+	padding-bottom: 6rem;
+}

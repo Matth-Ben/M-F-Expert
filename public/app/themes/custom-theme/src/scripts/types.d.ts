@@ -12,6 +12,7 @@ declare global {
 			apiUrl: string;
 			textDomain: string;
 			debug: boolean;
+			i18n: { closePanel: string; panelLabel: string; panelError: string };
 		};
 		/** Fragments REST config (includes/Core/Assets.php). */
 		WPG_FRAGMENTS: {

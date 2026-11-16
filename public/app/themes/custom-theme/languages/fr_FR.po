@@ -394,3 +394,15 @@ msgstr "M"
 msgctxt "Space size name"
 msgid "L"
 msgstr "L"
+
+#: includes/Core/Assets.php:68
+msgid "Close panel"
+msgstr "Fermer le panneau"
+
+#: includes/Core/Assets.php:69
+msgid "Panel"
+msgstr "Panneau"
+
+#: includes/Core/Assets.php:70
+msgid "Unable to load panel content."
+msgstr "Impossible de charger le contenu du panneau."

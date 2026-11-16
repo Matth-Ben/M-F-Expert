@@ -8,6 +8,7 @@ import gsap from 'gsap';
 import { resetScroll } from './lenis';
 import { mountBlocks, unmountBlocks } from '../core/blocks';
 import { syncAssets } from '../core/sync-assets';
+import { getPanelManagerIfReady } from '../fragments/PanelManager';
 
 export const initBarba = () => {
 	barba.init({
@@ -21,6 +22,8 @@ export const initBarba = () => {
 			{
 				name: 'opacity-transition',
 				leave(data) {
+					// A navigation link inside the panel: close it first, or the new page would stay inert.
+					getPanelManagerIfReady()?.closeForNavigation();
 					unmountBlocks(data.current.container);
 
 					const wrapper = data.current.container.parentNode;

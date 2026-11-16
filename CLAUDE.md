@@ -1,0 +1,225 @@
+# CLAUDE.md — Projet WP Gutenberg
+
+> **Rôle de ce fichier** : contexte permanent de toute session Claude Code sur ce dépôt. À lire en premier, avant d'explorer ou de coder.
+>
+> **Document vivant** : dès qu'une session constate un écart avec le code réel (fichier déplacé, convention changée), elle **met ce fichier à jour** dans le même changement.
+
+---
+
+## 0. Objectif
+
+Claude absorbe le répétitif déjà connu (structure, plomberie des blocs, accessibilité, performance) pour que le temps humain aille aux décisions techniques et créatives. Ce fichier doit permettre de :
+
+- ne jamais recréer une fonctionnalité qui existe déjà ;
+- produire des blocs Gutenberg cohérents avec l'existant sans réexplication ;
+- appliquer par défaut les bonnes pratiques Gutenberg / Tailwind / accessibilité / performance ;
+- savoir quand passer la main à un agent spécialisé (§6).
+
+---
+
+## 1. Vue d'ensemble
+
+Site WordPress dont le back-office repose sur **l'éditeur de blocs** : le client compose ses pages avec des blocs qui ont **le rendu réel du site** dans l'éditeur. Pas de Timber/Twig, pas d'ACF.
+
+**Stack**
+
+- **Backend** : PHP 8.2+, WordPress 7.1 (`johnpbloch/wordpress-core`), tout via Composer (core et plugins non versionnés). `public/wp-config.php` lit le `.env` racine.
+- **Templates** : PHP natif (hiérarchie WordPress + `parts/`), helpers `wpg_*`.
+- **Blocs** : blocs Gutenberg **dynamiques** (`block.json` + `edit.js` + `render.php`), compilés par `@wordpress/scripts` v34 (Node 22.0 local ; les versions ≥ 35 exigent Node ≥ 22.12).
+- **Front** : Vite 7 + Tailwind CSS v4, GSAP (+ SplitText), Barba.js, Lenis. JS en `.js`/`.ts` dans `src/scripts/`.
+- **Plugins** : uniquement des plugins **gratuits** de wordpress.org via wpackagist (SEOPress, Matomo, Relevanssi, Simple History, Wordfence, WP Health). Aucun plugin payant ni privé.
+- **Langue** : `fr_FR`, text domain `wp-gutenberg`.
+
+**Arborescence**
+
+```
+wp-gutenberg/
+├── CLAUDE.md, .claude/ (agents, skills)
+├── composer.json, .env(.example)
+└── public/
+    ├── wp-config.php, index.php
+    ├── wordpress/                      core (Composer, non versionné)
+    └── app/
+        ├── mu-plugins/                 toujours actifs (voir tableau)
+        ├── plugins/                    Composer, non versionnés
+        └── themes/custom-theme/        le thème
+```
+
+**Le thème (`public/app/themes/custom-theme/`)**
+
+```
+functions.php        autoloader PSR-4 (WPGutenberg\ → includes/) + Theme::boot()
+theme.json           design tokens + verrouillage de l'éditeur (source unique des couleurs/espacements/largeurs)
+header.php, footer.php, page.php, single.php, index.php, 404.php
+parts/               site-header, site-footer, content-blocks, components/ (menu, post-card), fragments/panels/
+patterns/            compositions de blocs (auto-enregistrées par WordPress)
+blocks/<slug>/       SOURCES des blocs : block.json, index.js, edit.js, render.php, [style.css], [view.js]
+blocks/_shared/      composants éditeur partagés (media.js : useMedia, MediaPanel, MediaCanvasPlaceholder)
+build/               blocs compilés + blocks-manifest.php + _editor/ (git-ignoré)
+config/              editor.php (blocs autorisés), socials.php
+includes/            Theme.php (liste des services), helpers.php,
+                     Core/ (Setup, Assets, Vite, Cleanup, Media), Editor/ (Blocks, Editor),
+                     Admin/ (Socials), Fragments/ (Rest, FragmentLoader)
+src/                 stylesheets/ (Tailwind), scripts/ (app.js, core/, fragments/, utils/), editor/ (editor.css, index.js),
+                     icons/ (sprite), fonts/, img/
+languages/           wp-gutenberg.pot, fr_FR.po/.mo, JSON des traductions JS
+bin/create-block.mjs générateur de blocs
+```
+
+**Fonctionnalités en place (à connaître avant de développer)**
+
+- **Enregistrement automatique des blocs** : `Editor\Blocks` lit `build/blocks-manifest.php` (`wp_register_block_types_from_metadata_collection`). Rien à déclarer en PHP. Catégorie d'inserteur `wpg` (« Blocs du site »), namespace de blocs `wpg/`.
+- **Éditeur WYSIWYG** : `Editor\Editor` charge la CSS du site dans l'iframe de l'éditeur (`enqueue_block_assets`, admin uniquement) + `src/editor/editor.css`. Liste blanche des blocs : `config/editor.php` (core + plugins) ; tous les `wpg/*` sont autorisés automatiquement. Patterns distants, Openverse et Block Directory désactivés.
+- **Assets à la demande** : CSS/JS de chaque bloc (core et custom) chargés seulement si le bloc est présent (`should_load_separate_core_block_assets`, `style` / `viewScriptModule` dans `block.json`). `src/scripts/core/sync-assets.js` recopie ces assets lors des transitions Barba.
+- **Runtime JS des blocs** : `src/scripts/core/blocks.js`. Un `view.js` fait `(window.wpgBlocks ??= []).push(['<slug>', setup])` ; `setup(el)` est appelé pour chaque `[data-wpg-block="<slug>"]`, y compris après Barba, et peut renvoyer un cleanup appelé à la sortie de page.
+- **Panneau modal** (`src/scripts/fragments/PanelManager.ts`) : `<div role="dialog" aria-modal>` nommé par le titre du fragment, reste de la page en `inert`, Échap / bouton / voile pour fermer, focus rendu au déclencheur (`aria-expanded` synchronisé), Lenis stoppé, fermé sans rendre le focus au début d'une navigation Barba (`closeForNavigation()`). Libellés traduits via `window.wpg.i18n` (`Core\Assets`).
+- **Fragments REST** (panneaux menu/filtres) : `POST /wp-json/wpg/v1/fragment`, whitelist + sanitisation dans `includes/Fragments/FragmentLoader.php`, templates dans `parts/fragments/panels/`, client `src/scripts/fragments/` (config `window.WPG_FRAGMENTS`).
+- **Design tokens** : `theme.json` (palette, `spacingSizes` sm/md/lg, `contentSize` 48rem / `wideSize` 90rem) → mappés pour Tailwind dans `src/stylesheets/theme.css` (`bg-primary`, `py-section-md`…).
+- **Tailwind hors cascade layer** : `styles.css` importe les utilitaires sans `@layer` pour primer sur la CSS WordPress (elle aussi hors layer). Les sections pleine largeur s'enchaînent sans `blockGap` (`components/content.css`).
+- **Logo** : logo personnalisé WordPress (Apparence > Personnaliser), sinon le nom du site — `wpg_logo()`.
+- **Images** : qualité 82, sous-tailles WebP générées à l'upload (`Core\Media`).
+- **Traductions JS** : `Core\Setup::script_translation_file()` redirige WordPress vers `languages/` du thème pour les JSON des scripts de blocs.
+
+**mu-plugins**
+
+| Fichier | Rôle |
+|---|---|
+| `client-menu-restrictions.php` | Rôle back-office `client_role`, masquage sélectif des menus wp-admin. |
+| `disable-features.php` | Désactive les commentaires (Gutenberg reste actif). |
+| `duplicate-post.php` | Lien « Dupliquer » sur posts/pages/CPT. |
+| `homepage-delete-protection.php` | Double confirmation avant suppression de la page d'accueil. |
+
+**N'existe PAS dans ce projet** (ne pas supposer leur présence) : ACF, Timber/Twig, piecesjs, endpoint newsletter, reCAPTCHA, Gravity Forms, fil d'Ariane (bloc SEOPress = version Pro uniquement), `--header-height` / `scroll-padding-top`, rechargement Barba des pages à formulaire.
+
+---
+
+## 2. Règles d'or
+
+1. **Chercher avant de créer.** Parcourir `blocks/`, `blocks/_shared/`, `parts/`, `includes/`, `includes/helpers.php` et `patterns/`. Préférer étendre (attribut, variante, style de bloc) plutôt que dupliquer.
+2. **Blocs dynamiques uniquement.** Le HTML front vient de `render.php` ; `save` ne renvoie que `<InnerBlocks.Content />` ou `null`. On peut ainsi modifier le markup sans « contenu invalide » sur les pages existantes. **Ne jamais renommer un bloc** (`wpg/<slug>`) sans migrer le contenu en base (`wp search-replace 'wp:ancien/' 'wp:nouveau/'`).
+3. **`edit.js` ≡ `render.php`.** Mêmes balises, mêmes classes Tailwind : c'est la condition du WYSIWYG. Les comportements front (parallaxe, split text, compteurs) ne sont pas rejoués dans l'éditeur ; tout attribut qui cache du contenu avant JS (`data-text-split`) est omis côté éditeur.
+4. **Une seule source pour les tokens : `theme.json`.** Nouvelle couleur = palette `theme.json` + mapping dans `theme.css`. Pas de valeurs arbitraires (`text-[17px]`, hex en dur). Couleurs/padding d'un bloc : `supports` natifs dans `block.json`, pas d'attributs maison.
+5. **Images = ID d'attachement** (`mediaId`), jamais d'URL. Front : `wp_get_attachment_image()` (srcset/sizes/lazy ; `loading: eager` + `fetchpriority: high` au-dessus de la ligne de flottaison). Éditeur : `useMedia()`.
+6. **Contenu riche = InnerBlocks** avec des blocs core (titres, paragraphes, boutons) plutôt que des champs texte multiples.
+7. **Tailwind utility-first.** CSS propre au bloc dans `blocks/<slug>/style.css` seulement si un utilitaire ne suffit pas. Toute surcharge d'une CSS tierce ou WordPress s'écrit **hors `@layer`** (une règle hors layer gagne toujours contre une règle en layer).
+8. **Performance.** Pas de JS global pour un bloc : `view.js` (`viewScriptModule`), chargé seulement là où le bloc est présent. Bibliothèque lourde = `import()` dynamique dans `view.js`.
+9. **Accessibilité par défaut (WCAG AA)**, critère d'acceptation de chaque bloc. Pièges déjà rencontrés sur de vrais projets (Lighthouse 100 et axe à 0 ne suffisent pas) :
+   - **Lien étiré** (carte cliquable) : ordre des variantes `focus-visible:after:outline-…` ; `after:focus-visible:` ne produit aucun focus visible (2.4.7).
+   - **Texte blanc sur photo** : voile ≥ 40 % ou dégradé sombre derrière le texte, contraste mesuré sur la vraie photo (1.4.3). Le hero utilise `bg-black/40`.
+   - **Header collant** (si un projet en ajoute un) : `scroll-padding-top` = hauteur du header pour que le focus ne passe pas dessous (2.4.11).
+   - **Panneau / modale** : nom accessible, reste de la page en `inert`, focus rendu au déclencheur ; `role="dialog"` sur un `<div>`, jamais un `<aside>`. Fermer le panneau au début d'une transition Barba.
+   - **Ancres / lien d'évitement** : déplacer le focus sur la cible, pas seulement défiler.
+   - **`prefers-reduced-motion`** : couper Lenis, fondus, compteurs (déjà fait dans `stats/view.js`), zooms.
+   - **Contrôles non textuels** : contraste ≥ 3:1 (1.4.11). **Libellés ARIA en français.**
+10. **i18n systématique.** Toute chaîne : `__( '…', 'wp-gutenberg' )` (PHP et JS). Après ajout : `pnpm i18n`, traduire les entrées vides de `languages/fr_FR.po`, relancer `pnpm i18n`.
+11. **Lecteur vidéo = Video.js** (jamais Plyr ni un lecteur maison) : importé dynamiquement dans le `view.js` du bloc (au clic sur l'aperçu ou à l'entrée dans le viewport), `player.dispose()` dans le cleanup. `<video preload="none" poster="…">` + `<track kind="captions">` si sous-titres (1.2.2). YouTube : `videojs-youtube` importé au clic ; Vimeo : iframe insérée au clic ; toujours un lien de repli.
+12. **Ce qu'un plugin produit, on le style, on ne le recode pas.** Et on ne **désenregistre jamais** un script du cœur (`jquery`, `wp-i18n`…) : WordPress ne les charge que si nécessaire.
+13. **Aucune licence ni clé dans un fichier versionné** (`.env` et `auth.json` sont ignorés). Pas de lien de téléchargement signé dans `composer.json`. Plugins : gratuits, via `composer require wpackagist-plugin/<slug>`. Pas de dump SQL ni de log dans le dépôt.
+14. **Icônes** (`src/icons/*.svg` → sprite `public/sprite.svg`) : `wpg_icon( 'id', 'classes' )`, couleur via `currentColor`. Vérifier toute nouvelle icône à l'écran (un `fill` exporté de Figma peut la rendre invisible).
+15. **Ne pas halluciner l'environnement.** Vérifier dans le repo avant de supposer un fichier, une classe ou une convention.
+
+---
+
+## 3. Créer un bloc (maquette → bloc Gutenberg)
+
+### Étape 1 — Réception
+Le mainteneur fournit une maquette (capture, export, ou lien Figma si le connecteur est disponible).
+
+### Étape 2 — Dialogue (avant tout code)
+Questions à trancher, groupées quand c'est évident :
+- **Identité** : slug kebab-case, rôle dans la page (hero, liste, CTA…), titre et description en français pour l'inserteur.
+- **Contenu** : quels textes sont des attributs `RichText` vs des InnerBlocks (préférer InnerBlocks) ; images (`mediaId`) ; liens (bloc `core/buttons` en InnerBlocks plutôt qu'un attribut URL).
+- **Structure** : bloc simple, ou parent/enfant (`parent` / `allowedBlocks` comme `wpg/stats` + `wpg/stat`) ?
+- **Variantes** : `supports` natifs (couleur, padding), attribut `enum` + contrôle dans l'inspecteur, ou style de bloc (`registerBlockStyle`) ?
+- **Responsive** : comportement par breakpoint si la maquette n'en couvre qu'un.
+- **Interaction** : bloc statique, ou `view.js` ? Animation GSAP ? Vidéo (règle n°11) ?
+- **Accessibilité** : pattern APG particulier (accordéon, onglets, carrousel, dialog) ?
+
+### Étape 3 — Anti-duplication
+Vérifier `blocks/` et `patterns/` : si un bloc proche existe, proposer une variante.
+
+### Étape 4 — Génération
+1. `pnpm block:new <slug> --title="Titre" [--inner] [--view]` (crée block.json, index.js, edit.js, render.php, style.css, [view.js]).
+2. `block.json` : attributs, `supports`, description en français.
+3. `render.php` (front) puis `edit.js` (éditeur) avec **les mêmes classes**. Réutiliser `blocks/_shared/media.js`.
+4. `view.js` seulement si nécessaire (runtime `wpgBlocks`, `data-wpg-block` dans `render.php`).
+5. Chaînes traduisibles → `pnpm i18n` + `fr_FR.po`.
+6. `pnpm build` (ou `pnpm dev`) ; ajouter le bloc à un pattern si c'est une brique de page courante.
+
+### Étape 5 — Revue
+Agents DA et Dev Accessibilité, puis Test (§6).
+
+---
+
+## 4. Conventions de code
+
+- **Services PHP** : une classe dans `includes/<Domaine>/` avec une méthode `register()` qui ne fait qu'accrocher des hooks, ajoutée à `Theme::SERVICES`. Namespace `WPGutenberg\`, classes `final`.
+- **Helpers** (`includes/helpers.php`, préfixe `wpg_`) : `wpg_asset()`, `wpg_logo()`, `wpg_render()` (part → string), `wpg_attrs()` (attributs HTML échappés), `wpg_icon()`, `wpg_menu_items()`, `wpg_socials()`, `wpg_html_class()`.
+- **Templates** : structure dans les fichiers racine + `parts/` (via `get_template_part( $slug, null, $args )`). Logique dans les classes/helpers, pas dans les templates.
+- **Config projet** : `config/*.php` (retourne un tableau) plutôt que des valeurs codées en dur dans les classes.
+- **Échappement** : `esc_html`, `esc_attr`, `esc_url`, `wp_kses_post` pour le contenu riche ; `get_block_wrapper_attributes()` sur la racine de chaque bloc.
+- **Pages** (`page.php`) : 100 % blocs, aucun titre ajouté par le thème (le hero porte le `<h1>`). Un seul `<h1>` par page.
+
+---
+
+## 5. Commandes et vérifications
+
+```bash
+# thème
+cd public/app/themes/custom-theme
+pnpm dev            # Vite (HMR) + wp-scripts --watch
+pnpm build          # blocs puis Vite
+pnpm block:new <slug> [--title=…] [--inner] [--view]
+pnpm i18n           # build + .pot + fusion fr_FR.po + .mo + JSON
+
+# projet
+composer require wpackagist-plugin/<slug>
+cd public && wp --path=wordpress <commande>
+```
+
+Vérifications utiles (Composer affiche des avertissements de dépréciation PHP 8.4 : `php -d error_reporting=0 /usr/local/bin/composer …`) :
+- PHP : `php -l` sur les fichiers modifiés ; `public/app/debug.log` (vider avant un test pour ne lire que les nouvelles entrées).
+- Blocs enregistrés : `wp eval` sur `WP_Block_Type_Registry`, ou `GET /wp/v2/block-types/wpg`.
+- Front : `curl -sk https://wp-gutenberg.local/?page_id=<id>` (permaliens en mode simple par défaut).
+- Navigateur : le navigateur intégré refuse les domaines `.local` ; utiliser Chrome headless (`google-chrome --headless=new --ignore-certificate-errors`) ou Playwright (`playwright-core` disponible dans `~/.npm/_npx/*/node_modules/`, avec `executablePath: '/usr/bin/google-chrome'`).
+
+---
+
+## 6. Agents spécialisés (`.claude/agents/`)
+
+| Agent | Quand l'invoquer |
+|---|---|
+| **dev** | Implémentation (block.json, edit.js, render.php, PHP, CSS, JS) — agent par défaut pour le code métier. |
+| **da** | Après implémentation : fidélité à la maquette, cohérence avec les tokens et les autres blocs, parité éditeur/front. |
+| **dev-accessibilite** | Après Dev : audit **et correction** WCAG AA. |
+| **test** | Vérification fonctionnelle : build, rendu, éditeur, Barba, non-régression. |
+| **test-accessibilite** | Audit a11y indépendant en fin de chaîne (ne corrige pas). |
+
+Skills génériques disponibles : `ponytail` (+ `-audit`, `-debt`, `-gain`, `-help`, `-review`) pour la solution la plus simple, `caveman` / `caveman-review` pour des réponses compressées.
+
+---
+
+## 7. Démarrer une session
+
+1. Lire ce fichier.
+2. Explorer rapidement le repo réel et corriger ce fichier en cas d'écart confirmé.
+3. Pour un nouveau bloc : suivre §3 (dialogue avant génération).
+4. Invoquer les agents (§6) aux bons moments.
+5. En fin de session, mettre à jour ce fichier et `custom-theme/README.md` si quelque chose a changé.
+
+---
+
+## 8. Écarts connus (dette à traiter, ne pas prendre pour des conventions)
+
+- **Barba et formulaires** : aucun rechargement complet n'est prévu pour une page dont un plugin a besoin de CSS dans le `<head>` ou de scripts inline. À ajouter (`data-barba-prevent` ou rechargement) le jour où un plugin de formulaire est installé.
+- **Permaliens** en mode « Simple » sur l'environnement local.
+
+---
+
+## 9. Décisions passées (pour ne pas les refaire)
+
+- **Twig/Timber → PHP natif** et **ACF → blocs Gutenberg dynamiques** : rendu réel dans l'éditeur, pas de moteur de template à compiler, pas de dépendance payante.
+- **Hybride plutôt que Full Site Editing** : header/footer/archives restent dans le thème (le client ne les modifie pas).
+- **Supprimé** à la création du projet : `views/` Twig, `acf-json/`, modèles Timber, auth front et fil d'Ariane maison (dépendaient de Timber, l'auth était déjà cassée), ancienne page de réglages d'agence (son seul réglage faisait doublon avec `disable-features.php`), plugins privés et payants.
+- **Le namespace de blocs `wpg/`** est figé : un renommage impose une migration du contenu en base (règle n°2).
+- **Pas de `make-php` i18n** : la version locale de WP-CLI ne l'a pas ; le `.mo` suffit.

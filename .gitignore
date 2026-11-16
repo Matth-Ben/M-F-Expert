@@ -16,3 +16,6 @@ auth.json
 .DS_Store
 .idea/
 .vscode/
+
+# Claude Code (local preferences only)
+.claude/settings.local.json

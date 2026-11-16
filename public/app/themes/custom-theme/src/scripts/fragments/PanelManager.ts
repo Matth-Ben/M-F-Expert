@@ -1,12 +1,18 @@
 /**
  * Panel Manager
- * 
- * Manages panel opening/closing without animations.
- * Handles loading fragments and injecting them into the panel shell.
- * Creates the panel DOM structure on first use.
+ *
+ * Accessible modal side panel (WAI-ARIA APG "Dialog (Modal)" pattern):
+ * - `<div role="dialog" aria-modal="true">`, named by the fragment's first heading
+ * - the rest of the page is made `inert` while open (focus can't leave the panel)
+ * - Escape / close button / overlay close it, focus goes back to the trigger
+ * - trigger buttons get `aria-expanded` / `aria-controls`
+ * - closed without returning focus when Barba navigates away (closeForNavigation)
+ *
+ * Content is loaded as a REST fragment (see includes/Fragments/).
  */
 
 import { loadFragment } from './fragmentLoader';
+import { startScroll, stopScroll } from '../utils/lenis';
 
 export interface PanelElements {
 	panel: HTMLElement;
@@ -14,258 +20,230 @@ export interface PanelElements {
 	content: HTMLElement;
 }
 
+const PANEL_ID = 'panel';
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/** Translated strings printed by includes/Core/Assets.php. */
+const t = (key: 'closePanel' | 'panelLabel' | 'panelError'): string => window.wpg?.i18n?.[key] ?? key;
+
 export class PanelManager {
 	private elements: PanelElements | null = null;
 	private currentPanelKey: string | null = null;
-	private isOpen: boolean = false;
+	private isOpen = false;
+	private trigger: HTMLElement | null = null;
+	private inertElements: HTMLElement[] = [];
 
 	constructor() {
-		this.init();
-	}
-
-	/**
-	 * Initialize panel manager
-	 */
-	private init(): void {
-		// Wait for DOM
 		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', () => this.setup());
+			document.addEventListener('DOMContentLoaded', () => this.setupEventListeners());
 		} else {
-			this.setup();
+			this.setupEventListeners();
 		}
 	}
 
 	/**
-	 * Setup event listeners (panel created on first use)
+	 * Create the panel shell on first use.
 	 */
-	private setup(): void {
-		this.setupEventListeners();
-	}
-
-	/**
-	 * Create panel shell in DOM
-	 */
-	private createPanelShell(): void {
+	private createPanelShell(): PanelElements {
 		if (this.elements) {
-			return; // Already created
+			return this.elements;
 		}
 
-		// Create overlay
 		const overlay = document.createElement('div');
-		overlay.id = 'panelOverlay';
 		overlay.className = 'panel-overlay';
 		overlay.setAttribute('aria-hidden', 'true');
 
-		// Create panel
-		const panel = document.createElement('aside');
-		panel.id = 'panel';
+		const panel = document.createElement('div');
+		panel.id = PANEL_ID;
 		panel.className = 'panel';
-		panel.setAttribute('aria-hidden', 'true');
 		panel.setAttribute('role', 'dialog');
 		panel.setAttribute('aria-modal', 'true');
+		panel.setAttribute('aria-label', t('panelLabel'));
+		panel.inert = true;
 
-		// Create panel header
 		const header = document.createElement('div');
 		header.className = 'panel__header';
 
 		const closeButton = document.createElement('button');
 		closeButton.type = 'button';
-		closeButton.setAttribute('data-panel-close', '');
 		closeButton.className = 'panel__close';
-		closeButton.setAttribute('aria-label', 'Close panel');
-		
+		closeButton.setAttribute('data-panel-close', '');
+		closeButton.setAttribute('aria-label', t('closePanel'));
+
 		const closeIcon = document.createElement('span');
 		closeIcon.setAttribute('aria-hidden', 'true');
 		closeIcon.textContent = '×';
 		closeButton.appendChild(closeIcon);
-
 		header.appendChild(closeButton);
 
-		// Create panel content
 		const content = document.createElement('div');
-		content.id = 'panelContent';
 		content.className = 'panel__content';
 
-		// Assemble
-		panel.appendChild(header);
-		panel.appendChild(content);
+		panel.append(header, content);
+		document.body.append(overlay, panel);
 
-		// Append to body
-		document.body.appendChild(overlay);
-		document.body.appendChild(panel);
-
-		// Store elements
 		this.elements = { panel, overlay, content };
+		return this.elements;
 	}
 
-	/**
-	 * Setup event listeners
-	 */
 	private setupEventListeners(): void {
-		// Listen for panel open triggers
-		document.addEventListener('click', (e) => {
-			const target = e.target as HTMLElement;
-			const trigger = target.closest('[data-panel-open]') as HTMLElement;
+		document.addEventListener('click', (event) => {
+			const target = event.target as HTMLElement;
 
-			if (trigger) {
-				e.preventDefault();
-				const panelKey = trigger.dataset.panelOpen;
-				if (panelKey) {
-					this.open(panelKey);
-				}
-			}
-		});
-
-		// Listen for panel close triggers
-		document.addEventListener('click', (e) => {
-			const target = e.target as HTMLElement;
-			
-			// Close button
-			if (target.closest('[data-panel-close]')) {
-				e.preventDefault();
-				this.close();
+			const trigger = target.closest<HTMLElement>('[data-panel-open]');
+			if (trigger?.dataset.panelOpen) {
+				event.preventDefault();
+				this.open(trigger.dataset.panelOpen, trigger);
 				return;
 			}
 
-			// Overlay click
-			if (this.elements && target === this.elements.overlay) {
-				e.preventDefault();
+			if (target.closest('[data-panel-close]') || (this.elements && target === this.elements.overlay)) {
+				event.preventDefault();
 				this.close();
 			}
 		});
 
-		// ESC key to close
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && this.isOpen) {
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && this.isOpen) {
+				event.preventDefault();
 				this.close();
 			}
 		});
 	}
 
 	/**
-	 * Open a panel
+	 * Open a panel and load its fragment.
 	 */
-	async open(key: string): Promise<void> {
-		// Create panel shell on first use
-		if (!this.elements) {
-			this.createPanelShell();
-		}
+	async open(key: string, trigger: HTMLElement | null = null): Promise<void> {
+		const { content } = this.createPanelShell();
 
-		if (!this.elements) {
-			console.error('[PanelManager] Failed to create panel elements');
-			return;
-		}
+		this.trigger = trigger ?? (document.activeElement as HTMLElement | null);
 
 		try {
-			// Load fragment
-			const response = await loadFragment({
-				type: 'panel',
-				key,
-			});
+			const response = await loadFragment({ type: 'panel', key });
 
 			if (!response.ok || !response.html) {
 				throw new Error('Invalid fragment response');
 			}
 
-			// Inject HTML
-			this.elements.content.innerHTML = response.html;
-
-			// Update state
-			this.currentPanelKey = key;
-			this.isOpen = true;
-
-			// Show panel
-			this.showPanel();
-
+			content.innerHTML = response.html;
 		} catch (error) {
 			console.error('[PanelManager] Error opening panel:', error);
-			// Optionally show error message to user
-			this.elements.content.innerHTML = `
-				<div class="panel-error">
-					<p>Unable to load panel content.</p>
-				</div>
-			`;
-			this.showPanel();
+			content.innerHTML = '';
+			const message = document.createElement('p');
+			message.className = 'panel-error';
+			message.setAttribute('role', 'alert');
+			message.textContent = t('panelError');
+			content.append(message);
 		}
+
+		this.currentPanelKey = key;
+		this.labelFromHeading();
+		this.show();
 	}
 
 	/**
-	 * Close the panel
+	 * Close the panel and give focus back to the element that opened it.
 	 */
 	close(): void {
-		if (!this.elements || !this.isOpen) {
-			return;
-		}
+		if (!this.isOpen) return;
 
-		// Hide panel
-		this.hidePanel();
-
-		// Update state
-		this.isOpen = false;
-		this.currentPanelKey = null;
+		this.hide();
+		this.trigger?.focus();
+		this.trigger = null;
 	}
 
 	/**
-	 * Show panel (no animation)
+	 * Close immediately at the start of a page transition, without moving focus
+	 * (the trigger may be leaving the page; Barba handles focus on the new page).
 	 */
-	private showPanel(): void {
+	closeForNavigation(): void {
+		if (!this.isOpen) return;
+
+		this.hide();
+		this.trigger = null;
+	}
+
+	/**
+	 * Name the dialog after the fragment's first heading (fallback: generic label).
+	 */
+	private labelFromHeading(): void {
+		if (!this.elements) return;
+
+		const { panel, content } = this.elements;
+		const heading = content.querySelector<HTMLElement>('h1, h2, h3');
+
+		if (heading) {
+			heading.id ||= `${PANEL_ID}-title`;
+			panel.setAttribute('aria-labelledby', heading.id);
+			panel.removeAttribute('aria-label');
+		} else {
+			panel.removeAttribute('aria-labelledby');
+			panel.setAttribute('aria-label', t('panelLabel'));
+		}
+	}
+
+	private show(): void {
 		if (!this.elements) return;
 
 		const { panel, overlay } = this.elements;
 
-		// Remove hidden classes/attributes
+		// Everything except the panel becomes inert: focus and screen readers stay in the dialog.
+		this.inertElements = Array.from(document.body.children).filter(
+			(el): el is HTMLElement => el instanceof HTMLElement && el !== panel && el !== overlay && !el.inert
+		);
+		this.inertElements.forEach((el) => (el.inert = true));
+
+		panel.inert = false;
 		panel.classList.add('is-open');
 		overlay.classList.add('is-visible');
-		panel.setAttribute('aria-hidden', 'false');
-		
-		// Trap focus
-		const firstFocusable = panel.querySelector<HTMLElement>(
-			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-		);
-		firstFocusable?.focus();
+		this.isOpen = true;
+		this.setExpanded(true);
+		stopScroll();
 
-		// Prevent body scroll
-		document.body.style.overflow = 'hidden';
+		// First focusable element of the fragment, else the close button.
+		const target = panel.querySelector<HTMLElement>(`.panel__content ${FOCUSABLE}`) ?? panel.querySelector<HTMLElement>(FOCUSABLE);
+		target?.focus();
 	}
 
-	/**
-	 * Hide panel (no animation)
-	 */
-	private hidePanel(): void {
+	private hide(): void {
 		if (!this.elements) return;
 
 		const { panel, overlay } = this.elements;
 
-		// Add hidden classes/attributes
+		this.inertElements.forEach((el) => (el.inert = false));
+		this.inertElements = [];
+
+		panel.inert = true;
 		panel.classList.remove('is-open');
 		overlay.classList.remove('is-visible');
-		panel.setAttribute('aria-hidden', 'true');
-
-		// Restore body scroll
-		document.body.style.overflow = '';
+		this.isOpen = false;
+		this.currentPanelKey = null;
+		this.setExpanded(false);
+		startScroll();
 	}
 
 	/**
-	 * Check if panel is open
+	 * Keep every trigger's aria-expanded in sync (header is outside the Barba container).
 	 */
+	private setExpanded(expanded: boolean): void {
+		document.querySelectorAll<HTMLElement>('[data-panel-open]').forEach((trigger) => {
+			trigger.setAttribute('aria-controls', PANEL_ID);
+			trigger.setAttribute('aria-expanded', String(expanded && trigger.dataset.panelOpen === this.currentPanelKey));
+		});
+	}
+
 	isOpened(): boolean {
 		return this.isOpen;
 	}
 
-	/**
-	 * Get current panel key
-	 */
 	getCurrentKey(): string | null {
 		return this.currentPanelKey;
 	}
 }
 
-// Global instance
 let panelManagerInstance: PanelManager | null = null;
 
-/**
- * Initialize the panel manager
- */
 export function initPanelManager(): PanelManager {
 	if (!panelManagerInstance) {
 		panelManagerInstance = new PanelManager();
@@ -273,12 +251,14 @@ export function initPanelManager(): PanelManager {
 	return panelManagerInstance;
 }
 
-/**
- * Get the panel manager instance
- */
 export function getPanelManager(): PanelManager {
 	if (!panelManagerInstance) {
 		throw new Error('PanelManager not initialized. Call initPanelManager() first.');
 	}
+	return panelManagerInstance;
+}
+
+/** Safe accessor for other modules (Barba): null when fragments are disabled. */
+export function getPanelManagerIfReady(): PanelManager | null {
 	return panelManagerInstance;
 }

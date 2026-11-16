@@ -64,6 +64,11 @@ final class Assets {
 						'apiUrl'     => rest_url(),
 						'textDomain' => WPG_TEXT_DOMAIN,
 						'debug'      => defined( 'WP_DEBUG' ) && WP_DEBUG,
+						'i18n'       => array(
+							'closePanel' => __( 'Close panel', 'wp-gutenberg' ),
+							'panelLabel' => __( 'Panel', 'wp-gutenberg' ),
+							'panelError' => __( 'Unable to load panel content.', 'wp-gutenberg' ),
+						),
 					)
 				),
 				wp_json_encode(

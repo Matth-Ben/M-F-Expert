@@ -33,6 +33,14 @@ return array(
 		'core/block', // Synced patterns.
 	),
 
+	// Initial content of new posts, per post type (blocks: [ name, attributes, inner blocks ]).
+	// The hero is also kept first on pages by src/editor/hero-first.js.
+	'post_type_templates' => array(
+		'page' => array(
+			array( 'wpg/hero' ),
+		),
+	),
+
 	// Third-party blocks (SEOPress free: FAQ with schema, HTML sitemap).
 	'plugin_blocks' => array(
 		'wpseopress/faq-block',

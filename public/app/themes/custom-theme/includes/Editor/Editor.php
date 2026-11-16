@@ -36,6 +36,7 @@ final class Editor {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_script' ) );
 		add_filter( 'allowed_block_types_all', array( $this, 'allowed_blocks' ), 10, 2 );
 		add_filter( 'block_editor_settings_all', array( $this, 'editor_settings' ) );
+		add_filter( 'register_post_type_args', array( $this, 'post_type_template' ), 10, 2 );
 		add_filter( 'should_load_remote_block_patterns', '__return_false' );
 		remove_action( 'enqueue_block_editor_assets', 'wp_enqueue_editor_block_directory_assets' );
 	}
@@ -120,8 +121,31 @@ final class Editor {
 	public function editor_settings( array $settings ): array {
 		$settings['enableOpenverseMediaCategory'] = false;
 		$settings['codeEditingEnabled']           = current_user_can( 'manage_options' );
+		// Locks set by the theme (e.g. the hero) can't be removed from the editor UI.
+		$settings['canLockBlocks']                = false;
 
 		return $settings;
+	}
+
+	/**
+	 * Default blocks of new posts (config/editor.php > post_type_templates).
+	 *
+	 * Not locked as a whole (template_lock false): blocks can be added after,
+	 * the hero itself is locked through its `lock` attribute default.
+	 *
+	 * @param array<string, mixed> $args      Post type args.
+	 * @param string               $post_type Post type name.
+	 * @return array<string, mixed>
+	 */
+	public function post_type_template( array $args, string $post_type ): array {
+		$templates = $this->config()['post_type_templates'] ?? array();
+
+		if ( isset( $templates[ $post_type ] ) ) {
+			$args['template']      = $templates[ $post_type ];
+			$args['template_lock'] = false;
+		}
+
+		return $args;
 	}
 
 	/**

@@ -7,6 +7,9 @@
 import { registerBlockStyle, unregisterBlockStyle, unregisterBlockVariation } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
 import { __ } from '@wordpress/i18n';
+import { keepHeroFirst } from './hero-first';
+
+keepHeroFirst();
 
 domReady(() => {
 	// Core styles that don't exist in the design system.

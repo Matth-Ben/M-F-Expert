@@ -79,6 +79,15 @@ Aucune déclaration PHP : `pnpm dev` / `pnpm build` compile le bloc et génère 
    ```
    `setup(el)` est appelé pour chaque instance, y compris après une navigation Barba ; le cleanup est appelé quand on quitte la page.
 
+## Hero en tête de page
+
+Sur les pages, le bloc **Hero** est toujours présent et toujours en premier :
+
+- les nouvelles pages démarrent avec un hero (`config/editor.php` → `post_type_templates`, ajouter d'autres types de contenu au besoin) ;
+- il est verrouillé : ni déplaçable, ni supprimable, ni déverrouillable (`lock` par défaut dans `blocks/hero/block.json`, `canLockBlocks: false`) ;
+- un bloc inséré au-dessus est automatiquement replacé juste en dessous, et une page existante sans hero en reçoit un à l'ouverture (`src/editor/hero-first.js`) ;
+- titre vide = titre de la page.
+
 ## Design tokens
 
 Une seule source : `theme.json`.

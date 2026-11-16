@@ -10,6 +10,7 @@
  */
 
 $media_id = (int) ( $attributes['mediaId'] ?? 0 );
+$title    = '' !== trim( wp_strip_all_tags( $attributes['title'] ?? '' ) ) ? $attributes['title'] : esc_html( get_the_title() ); // Fallback: page title.
 $parallax = ! empty( $attributes['parallax'] );
 $animate  = ! empty( $attributes['animateTitle'] );
 
@@ -35,9 +36,9 @@ if ( $parallax ) {
 	<?php endif; ?>
 
 	<div class="container relative py-section-md">
-		<?php if ( ! empty( $attributes['title'] ) ) : ?>
+		<?php if ( $title ) : ?>
 			<h1 class="h1 max-w-4xl" <?php echo $animate ? 'data-text-split="chars" data-text-animation="fade"' : ''; ?>>
-				<?php echo wp_kses_post( $attributes['title'] ); ?>
+				<?php echo wp_kses_post( $title ); ?>
 			</h1>
 		<?php endif; ?>
 

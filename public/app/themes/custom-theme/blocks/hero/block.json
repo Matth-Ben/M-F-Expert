@@ -6,21 +6,55 @@
 	"title": "Hero",
 	"category": "wpg",
 	"icon": "cover-image",
-	"description": "Grand visuel d'en-tête avec titre, texte et boutons.",
-	"keywords": ["header", "banner", "bannière", "en-tête"],
+	"description": "En-tête de page : titre (titre de la page par défaut), texte, image et boutons. Toujours en haut de page.",
+	"keywords": [
+		"header",
+		"banner",
+		"bannière",
+		"en-tête"
+	],
 	"textdomain": "wp-gutenberg",
 	"attributes": {
-		"title": { "type": "string", "default": "" },
-		"text": { "type": "string", "default": "" },
-		"mediaId": { "type": "number" },
-		"parallax": { "type": "boolean", "default": true },
-		"animateTitle": { "type": "boolean", "default": true },
-		"align": { "type": "string", "default": "full" }
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"text": {
+			"type": "string",
+			"default": ""
+		},
+		"mediaId": {
+			"type": "number"
+		},
+		"parallax": {
+			"type": "boolean",
+			"default": true
+		},
+		"animateTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		},
+		"lock": {
+			"type": "object",
+			"default": {
+				"move": true,
+				"remove": true
+			}
+		}
 	},
 	"supports": {
 		"html": false,
-		"align": ["full"],
-		"anchor": true
+		"align": [
+			"full"
+		],
+		"anchor": true,
+		"multiple": false,
+		"inserter": false,
+		"reusable": false
 	},
 	"example": {
 		"attributes": {

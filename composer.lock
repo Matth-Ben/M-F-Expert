@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "141665c754242dd500e046ee7274c4eb",
+    "content-hash": "8b577ba83cc5d9eeacb7768049874058",
     "packages": [
         {
             "name": "composer/installers",
@@ -154,24 +154,24 @@
         },
         {
             "name": "johnpbloch/wordpress-core",
-            "version": "6.9.4",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress-core.git",
-                "reference": "13e02e0047ca5c8ec8dc837c2de8a5bd3583b879"
+                "reference": "36ac9875ff3f09afe1d91f996bfac0ac261922ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/13e02e0047ca5c8ec8dc837c2de8a5bd3583b879",
-                "reference": "13e02e0047ca5c8ec8dc837c2de8a5bd3583b879",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress-core/zipball/36ac9875ff3f09afe1d91f996bfac0ac261922ed",
+                "reference": "36ac9875ff3f09afe1d91f996bfac0ac261922ed",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2.24"
+                "php": ">=7.4"
             },
             "provide": {
-                "wordpress/core-implementation": "6.9.4"
+                "wordpress/core-implementation": "7.1.4"
             },
             "type": "wordpress-core",
             "notification-url": "https://packagist.org/downloads/",
@@ -198,7 +198,7 @@
                 "source": "https://core.trac.wordpress.org/browser",
                 "wiki": "https://codex.wordpress.org/"
             },
-            "time": "2026-03-11T15:27:36+00:00"
+            "time": "2026-10-28T19:49:26+00:00"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -314,15 +314,15 @@
         },
         {
             "name": "wpackagist-plugin/matomo",
-            "version": "5.8.0",
+            "version": "5.13.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/matomo/",
-                "reference": "tags/5.8.0"
+                "reference": "tags/5.13.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/matomo.5.8.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/matomo.5.13.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -332,15 +332,15 @@
         },
         {
             "name": "wpackagist-plugin/relevanssi",
-            "version": "4.26.1",
+            "version": "4.28.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/relevanssi/",
-                "reference": "tags/4.26.1"
+                "reference": "tags/4.28.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/relevanssi.4.26.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/relevanssi.4.28.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -350,15 +350,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "5.24.1",
+            "version": "5.36.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/5.24.1"
+                "reference": "tags/5.36.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.5.24.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.5.36.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -368,15 +368,15 @@
         },
         {
             "name": "wpackagist-plugin/wordfence",
-            "version": "8.1.4",
+            "version": "9.1.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordfence/",
-                "reference": "tags/8.1.4"
+                "reference": "tags/9.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordfence.8.1.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordfence.9.1.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -386,7 +386,7 @@
         },
         {
             "name": "wpackagist-plugin/wp-health",
-            "version": "v2.22.0",
+            "version": "2.28.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-health/",
@@ -394,7 +394,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-health.v2.22.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-health.zip?timestamp=1793321392"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

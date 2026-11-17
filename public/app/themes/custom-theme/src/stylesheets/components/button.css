@@ -160,8 +160,8 @@
 }
 
 /*
- * Arrow after the label (« Découvrir notre approche → »): class `has-arrow` on the Button block
- * (Advanced > Additional CSS class(es); WordPress puts it on the .wp-block-button wrapper).
+ * Arrow after the label (« Découvrir notre approche → »): class `has-arrow` on the Button block, toggled by the
+ * « Flèche » option of its sidebar (src/editor/index.js); WordPress puts it on the .wp-block-button wrapper.
  * Decorative (empty content, nothing announced), same mask technique as the icons above.
  */
 .wp-block-button.has-arrow .wp-block-button__link::after {

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-17T11:38:38+00:00\n"
+"POT-Creation-Date: 2026-11-17T14:44:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: wp-gutenberg\n"
@@ -125,36 +125,36 @@ msgstr ""
 msgid "Your message has not been sent. Please try again."
 msgstr ""
 
-#: build/contact/render.php:86
+#: build/contact/render.php:87
 #: parts/fragments/panels/menu.php:24
 #: build/contact/index.js:1
 msgid "Call us"
 msgstr ""
 
-#: build/contact/render.php:92
+#: build/contact/render.php:93
 msgid "Contact form"
 msgstr ""
 
-#: build/contact/render.php:107
+#: build/contact/render.php:108
 msgid "Thank you! Your message has been sent. We will get back to you as soon as possible."
 msgstr ""
 
 #. translators: %s: error message, or page title (contact form result)
-#: build/contact/render.php:155
+#: build/contact/render.php:156
 #: includes/Forms/ContactForm.php:73
 msgid "Error: %s"
 msgstr ""
 
-#: build/contact/render.php:163
+#: build/contact/render.php:164
 msgid "Leave this field empty"
 msgstr ""
 
-#: build/contact/render.php:175
+#: build/contact/render.php:176
 #: build/contact/index.js:1
 msgid "Send the message"
 msgstr ""
 
-#: build/contact/render.php:199
+#: build/contact/render.php:200
 #: build/contact/index.js:1
 msgid "Map: how to find the salon"
 msgstr ""
@@ -367,15 +367,15 @@ msgstr ""
 msgid "No icon"
 msgstr ""
 
-#: includes/Admin/OptionsPage.php:267
+#: includes/Admin/OptionsPage.php:291
 msgid "Use this image"
 msgstr ""
 
-#: includes/Admin/OptionsPage.php:270
+#: includes/Admin/OptionsPage.php:294
 msgid "Choose an image"
 msgstr ""
 
-#: includes/Admin/OptionsPage.php:271
+#: includes/Admin/OptionsPage.php:295
 msgid "Use the default image"
 msgstr ""
 
@@ -491,19 +491,19 @@ msgstr ""
 msgid "No posts found."
 msgstr ""
 
-#: parts/components/badge.php:14
+#: parts/components/badge.php:15
 #: build/family/index.js:1
 #: build/service-family/index.js:1
 msgid "NEW"
 msgstr ""
 
-#: parts/components/badge.php:14
+#: parts/components/badge.php:15
 #: build/family/index.js:1
 #: build/service-family/index.js:1
 msgid "in"
 msgstr ""
 
-#: parts/components/badge.php:14
+#: parts/components/badge.php:15
 #: build/family/index.js:1
 #: build/service-family/index.js:1
 msgid "VIRIAT"
@@ -750,6 +750,7 @@ msgstr ""
 #: build/service-family/index.js:1
 #: build/service/index.js:1
 #: build/services/index.js:1
+#: build/_editor/index.js:1
 msgid "Arrow"
 msgstr ""
 
@@ -1123,6 +1124,14 @@ msgstr ""
 
 #: build/text-media/index.js:1
 msgid "Title (optional)…"
+msgstr ""
+
+#: build/_editor/index.js:1
+msgid "Show an arrow after the text"
+msgstr ""
+
+#: build/_editor/index.js:1
+msgid "For buttons leading to another page."
 msgstr ""
 
 #: build/_editor/index.js:1

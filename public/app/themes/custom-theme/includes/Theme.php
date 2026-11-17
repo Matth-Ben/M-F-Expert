@@ -26,6 +26,7 @@ final class Theme {
 		Core\Media::class,
 		Core\Assets::class,
 		Core\ContactLinks::class,
+		Core\Favicon::class,
 		Editor\Blocks::class,
 		Editor\Editor::class,
 		Admin\Contact::class,

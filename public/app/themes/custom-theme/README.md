@@ -38,7 +38,7 @@ custom-theme/
 │   ├── Forms/               ContactForm (traitement du formulaire du bloc Contact)
 │   ├── Fragments/           API REST des panneaux (menu, filtres)
 │   └── helpers.php          wpg_asset, wpg_render, wpg_icon, wpg_logo, wpg_contact, wpg_phone_url, wpg_chat_url…
-├── public/                  sprite.svg (généré) + img/logo*.webp (emblème)
+├── public/                  sprite.svg (généré) + img/logo*.webp (emblème) + img/favicon/ (favicon et icônes d'app, Core\Favicon)
 └── src/
     ├── stylesheets/         Tailwind v4 (styles.css = entrée)
     ├── scripts/             JS global (Barba, Lenis, GSAP) + runtime des blocs
@@ -99,7 +99,7 @@ Une seule source pour les couleurs et espacements : `theme.json`, mappé pour Ta
 - **Espacements** : `section-md` = bandeaux (56 → 96 px), `section-lg` = bas des sections claires (64 → 110 px), valeurs exactes de la maquette à 390 et 1360 px. Conteneur : utilitaire `container` (1240 px, marges 20/40 px).
 - **Enchaînement des sections** : une section claire (sans fond) n'a qu'un padding bas ; juste après un bandeau coloré (`bg-bordeaux`, `bg-cream`, bloc avec couleur de fond) elle reprend `section-lg` en haut. Règle unique pour tous les blocs clairs dans `components/content.css` (à compléter si un nouveau bloc clair est créé).
 - **Typographie** (`components/typographies.css`, déclarées en `@utility`) : `display`, `h1`, `h2`, `h3`, `script`, `hook`, `quote`, `lead`, `eyebrow`, `rule`, `card-title` (titre de carte 19 px). Tailles nommées en plus de l'échelle : `text-note` (15,5 px, textes de cartes et listes) et `text-card` (19 px). Les titres libres (bloc Titre, `.wp-block-heading`) reçoivent `h2` / `h3` ; les titres des blocs gardent leur propre style. Polices auto-hébergées via `@fontsource` : DM Serif Display, Montserrat, Caveat (en attendant le fichier « Buffalo » de la charte).
-- **Boutons** (`components/button.css`) : `.btn btn--primary|outline|light|chat`, `.link-arrow`, interlignage 1,7 comme la maquette (59 px, 52 px en `btn--sm`). Le bloc core Bouton a les styles *Par défaut*, *Contour* et *Clair (sur bordeaux)* ; la classe CSS additionnelle **`has-arrow`** ajoute la flèche après le texte (« Découvrir notre approche → »).
+- **Boutons** (`components/button.css`) : `.btn btn--primary|outline|light|chat`, `.link-arrow`, interlignage 1,7 comme la maquette (59 px, 52 px en `btn--sm`). Le bloc core Bouton a les styles *Par défaut*, *Contour* et *Clair (sur bordeaux)* ; l'interrupteur **Flèche** de la barre latérale ajoute la flèche après le texte (« Découvrir notre approche → », classe `has-arrow`).
 - **En-tête** : navigation complète et bouton à partir de 1200 px (point de rupture `nav` de `theme.css`, variantes `nav:` / `max-nav:`) ; en dessous, bouton de menu rond. La barre « Appeler / Chat » et le chat flottant restent sur `lg`.
 - **Composants partagés** (`components/shared.css`) : `.check-list` (+ `--band`, `--cards`, `--on-dark`, applicable à un bloc Liste), `.photo-frame` (cadre doré décalé, `--text` : photo moins haute du bloc Texte + image), badge « NOUVEAU sur VIRIAT » (`parts/components/badge.php` / `blocks/_shared/badge.js`, texte en unités de conteneur : il suit la taille du badge).
 - **Icônes** : `src/icons/*.svg` (trait 1,8 px, `currentColor`) → `wpg_icon( 'phone' )` en PHP, `<Icon name="phone" />` (`blocks/_shared/icon.js`) dans l'éditeur.

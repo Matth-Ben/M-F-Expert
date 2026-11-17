@@ -6,6 +6,8 @@
  */
 import { registerBlockStyle, unregisterBlockStyle, unregisterBlockVariation } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
@@ -18,6 +20,48 @@ keepHeroFirst();
  * wrapper when its link is the `#appeler` / `#chat` token or a tel: link.
  */
 const BUTTON_ICONS = { '#appeler': 'phone', '#chat': 'chat' };
+
+/**
+ * Button option « Flèche après le texte » (sidebar): toggles the `has-arrow` class (components/button.css),
+ * so nobody has to type a CSS class. Stored in the block's className: front and editor render the same.
+ */
+const ARROW_CLASS = 'has-arrow';
+
+addFilter(
+	'editor.BlockEdit',
+	'wpg/button-arrow',
+	createHigherOrderComponent(
+		(BlockEdit) => (props) => {
+			if (props.name !== 'core/button') {
+				return <BlockEdit {...props} />;
+			}
+
+			const classes = (props.attributes.className ?? '').split(/\s+/).filter(Boolean);
+			const toggleArrow = (on) => {
+				const next = classes.filter((name) => name !== ARROW_CLASS).concat(on ? [ARROW_CLASS] : []);
+				props.setAttributes({ className: next.length ? next.join(' ') : undefined });
+			};
+
+			return (
+				<>
+					<BlockEdit {...props} />
+					<InspectorControls>
+						<PanelBody title={__('Arrow', 'wp-gutenberg')}>
+							<ToggleControl
+								__nextHasNoMarginBottom
+								label={__('Show an arrow after the text', 'wp-gutenberg')}
+								help={__('For buttons leading to another page.', 'wp-gutenberg')}
+								checked={classes.includes(ARROW_CLASS)}
+								onChange={toggleArrow}
+							/>
+						</PanelBody>
+					</InspectorControls>
+				</>
+			);
+		},
+		'withArrowOption'
+	)
+);
 
 addFilter(
 	'editor.BlockListBlock',

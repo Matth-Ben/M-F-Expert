@@ -20,11 +20,9 @@ export function initFragments(): void {
 	try {
 		// Initialize fragment loader
 		initFragmentLoader(window.WPG_FRAGMENTS);
-		console.log('[Fragments] FragmentLoader initialized');
 
 		// Initialize panel manager
 		initPanelManager();
-		console.log('[Fragments] PanelManager initialized');
 
 	} catch (error) {
 		console.error('[Fragments] Initialization error:', error);

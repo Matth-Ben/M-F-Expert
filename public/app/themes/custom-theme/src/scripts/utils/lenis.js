@@ -39,7 +39,6 @@ export const initLenis = () => {
 
     // requestAnimationFrame(raf);
 
-    console.log('Lenis Smooth Scroll initialized.');
 
     window.lenis = lenis;
 

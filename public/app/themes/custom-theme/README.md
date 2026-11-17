@@ -106,7 +106,7 @@ Une seule source pour les couleurs et espacements : `theme.json`, mappé pour Ta
 
 ## Coordonnées et liens d'appel
 
-**Réglages > Coordonnées** (`config/contact.php`) : téléphone, e-mail, adresse, horaires, accès, lien du chat, signature du pied de page. Lus partout via `wpg_contact()`.
+**Réglages > Coordonnées** (`config/contact.php`) : téléphone, e-mail, adresse, horaires, accès, lien du chat. Lus partout via `wpg_contact()`.
 
 Trois entrées du menu d'administration (visibles par le rôle Client), construites sur `includes/Admin/OptionsPage.php` (une option par page, champs déclarés dans `fields()`) :
 

@@ -30,6 +30,10 @@ final class Cleanup {
 		remove_action( 'wp_head', 'rsd_link' );
 		remove_action( 'wp_head', 'wp_shortlink_wp_head' );
 
+		// WordPress speculative loading (prefetch on hover) would fetch every page a second time:
+		// Barba already prefetches on hover / focus / touch and reuses its cache (src/scripts/utils/barba.js).
+		add_filter( 'wp_speculation_rules_configuration', '__return_null' );
+
 		// Only load the CSS of blocks actually present on the page (core + custom).
 		add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 

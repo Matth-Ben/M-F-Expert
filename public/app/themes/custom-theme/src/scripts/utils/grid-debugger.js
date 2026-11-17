@@ -234,10 +234,10 @@ export const initGridDebugger = () => {
 
     // Listen for Shift + G
     document.addEventListener('keydown', (e) => {
-        if (e.shiftKey && e.key.toLowerCase() === 'g') {
+        const typing = e.target.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"]');
+        if (e.shiftKey && e.key.toLowerCase() === 'g' && !typing) {
             toggleDebugger();
         }
     });
 
-    console.log('Grid & Spacing Debugger initialized. Press Shift+G to toggle.');
 };

@@ -99,7 +99,7 @@ $bottom_space = $socials ? 'lg:pb-18' : 'lg:pb-0';
 	</a>
 </footer>
 
-<nav class="fixed inset-x-0 bottom-0 z-40 flex gap-2.5 bg-cream px-4 py-3 shadow-bar lg:hidden" aria-label="<?php esc_attr_e( 'Quick contact', 'wp-gutenberg' ); ?>">
+<nav class="quick-bar fixed inset-x-0 bottom-0 z-40 flex gap-2.5 bg-cream px-4 py-3 shadow-bar lg:hidden" aria-label="<?php esc_attr_e( 'Quick contact', 'wp-gutenberg' ); ?>">
 	<a class="btn btn--primary min-h-[3.25rem] flex-1 px-4 py-2 text-md" href="<?php echo esc_url( wpg_phone_url() ); ?>">
 		<?php echo wpg_icon( 'phone' ); // phpcs:ignore -- escaped in helper. ?>
 		<?php esc_html_e( 'Call', 'wp-gutenberg' ); ?>

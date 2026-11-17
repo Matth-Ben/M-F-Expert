@@ -22,6 +22,8 @@ import { destroyReveal, initReveal } from './reveal';
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const scrollPositions = new Map(); // URL => scrollY, for back / forward
 
+let anchorTarget = null; // Element targeted by the #hash of the new URL (link to /page/#section)
+
 let curtain;
 
 /** The curtain, created once. A loader appears only if the next page is slow to come. */
@@ -115,8 +117,16 @@ export const initBarba = () => {
 
 					// History navigation: Barba sets the trigger to 'back', 'forward' or 'popstate' (a link gives its element).
 					const back = ['back', 'forward', 'popstate'].includes(data.trigger);
+					// Barba drops the #hash from the next URL: read it on the clicked link.
+					const hash = data.trigger instanceof HTMLAnchorElement ? decodeURIComponent(data.trigger.hash.replace(/^#/, '')) : '';
+					anchorTarget = !back && hash ? data.next.container.querySelector(`#${CSS.escape(hash)}`) : null;
+
 					if (back && scrollPositions.has(data.next.url.href)) {
 						scrollToY(scrollPositions.get(data.next.url.href));
+					} else if (anchorTarget) {
+						// Same place as a direct load of /page/#section: below the sticky header (scroll-padding-top).
+						const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+						scrollToY(anchorTarget.getBoundingClientRect().top + window.scrollY - padding);
 					} else {
 						resetScroll();
 					}
@@ -145,7 +155,15 @@ export const initBarba = () => {
 					syncCurrentLinks();
 					syncNavIndicator();
 
-					focusNewPage(data.next.container);
+					if (anchorTarget) {
+						// Put the #hash back in the address bar (shareable URL), keeping Barba's history state.
+						history.replaceState(history.state, '', `#${encodeURIComponent(anchorTarget.id)}`);
+						// Link to a section: the focus goes there, like the skip link (CLAUDE.md, rule 9).
+						if (!anchorTarget.hasAttribute('tabindex')) anchorTarget.setAttribute('tabindex', '-1');
+						anchorTarget.focus({ preventScroll: true });
+					} else {
+						focusNewPage(data.next.container);
+					}
 				},
 			},
 		],

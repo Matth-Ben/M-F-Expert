@@ -6,10 +6,32 @@
  */
 import { registerBlockStyle, unregisterBlockStyle, unregisterBlockVariation } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
+import { createHigherOrderComponent } from '@wordpress/compose';
+import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 import { keepHeroFirst } from './hero-first';
 
 keepHeroFirst();
+
+/**
+ * Button icons in the editor (same as the front, see components/button.css): `data-icon` on the Button block
+ * wrapper when its link is the `#appeler` / `#chat` token or a tel: link.
+ */
+const BUTTON_ICONS = { '#appeler': 'phone', '#chat': 'chat' };
+
+addFilter(
+	'editor.BlockListBlock',
+	'wpg/button-icon',
+	createHigherOrderComponent(
+		(BlockListBlock) => (props) => {
+			const url = props.name === 'core/button' ? props.attributes.url ?? '' : '';
+			const icon = BUTTON_ICONS[url] ?? (url.startsWith('tel:') ? 'phone' : null);
+
+			return icon ? <BlockListBlock {...props} wrapperProps={{ ...props.wrapperProps, 'data-icon': icon }} /> : <BlockListBlock {...props} />;
+		},
+		'withButtonIcon'
+	)
+);
 
 domReady(() => {
 	// Core styles that don't exist in the design system.

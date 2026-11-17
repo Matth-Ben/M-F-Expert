@@ -82,7 +82,7 @@ final class ContactForm {
 		$back = $this->back_url();
 
 		if ( ! isset( $_POST[ self::NONCE ] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::NONCE ] ) ), self::ACTION ) ) {
-			$this->redirect( $back, 'error', array( 'reason' => 'expired' ) );
+			$this->redirect( $back, 'error', array( 'reason' => 'expired', 'values' => $this->values() ) );
 		}
 
 		// Bots fill every field: pretend it worked, send nothing.
@@ -228,6 +228,7 @@ final class ContactForm {
 	private function back_url(): string {
 		$referer = wp_get_referer();
 		$url     = $referer ? wp_validate_redirect( $referer, home_url( '/' ) ) : home_url( '/' );
+		$url     = str_starts_with( $url, '/' ) ? home_url( $url ) : $url; // Absolute: also printed in the email body.
 
 		return remove_query_arg( array( 'contact', 'contact_token' ), $url );
 	}

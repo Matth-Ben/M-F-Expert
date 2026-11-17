@@ -157,7 +157,7 @@ abstract class OptionsPage {
 				'select'   => array_key_exists( (string) $value, $field['options'] ) ? (string) $value : (string) ( $field['default'] ?? '' ),
 				'email'    => sanitize_email( (string) $value ),
 				'url'      => esc_url_raw( (string) $value ),
-				'link'     => preg_match( '/^#[\w-]+$/', (string) $value ) ? (string) $value : esc_url_raw( (string) $value ),
+				'link'     => self::sanitize_link( trim( (string) $value ) ),
 				'textarea' => sanitize_textarea_field( (string) $value ),
 				'editor'   => self::sanitize_inline( (string) $value ),
 				default    => sanitize_text_field( (string) $value ),
@@ -172,9 +172,26 @@ abstract class OptionsPage {
 	 */
 	private static function sanitize_inline( string $html ): string {
 		$html = preg_replace( '@<(script|style)[^>]*?>.*?</\1>@si', '', $html );
+		$html = preg_replace( '@<br\s*/?>|</p>\s*<p[^>]*>@i', ' ', $html ); // Line breaks become spaces, never glued words.
 		$html = wp_kses( $html, self::INLINE_HTML );
 
 		return trim( preg_replace( '/\s+/u', ' ', str_replace( '&nbsp;', ' ', $html ) ) );
+	}
+
+	/**
+	 * Button link: a token (#appeler), a page path (« contact » → /contact/), a domain (« www.site.fr » → https://…) or a URL.
+	 */
+	private static function sanitize_link( string $value ): string {
+		if ( '' === $value || preg_match( '/^#[\w-]+$/', $value ) ) {
+			return $value;
+		}
+
+		if ( ! preg_match( '#^(/|\#|\?|[a-z][a-z0-9+.-]*:)#i', $value ) ) {
+			$first = strtok( $value, '/' );
+			$value = str_contains( (string) $first, '.' ) ? 'https://' . $value : '/' . trim( $value, '/' ) . '/';
+		}
+
+		return esc_url_raw( $value );
 	}
 
 	private static function has_type( string $type ): bool {
@@ -190,6 +207,13 @@ abstract class OptionsPage {
 			<?php if ( $this->intro() ) : ?>
 				<p><?php echo wp_kses( $this->intro(), array( 'a' => array( 'href' => true ) ) ); ?></p>
 			<?php endif; ?>
+
+			<?php
+			// Submenus of Settings get the « Settings saved » notice from WordPress; top-level pages print it themselves.
+			if ( ! isset( $this->menu()['parent'] ) ) {
+				settings_errors();
+			}
+			?>
 
 			<form method="post" action="options.php">
 				<?php settings_fields( static::OPTION ); ?>

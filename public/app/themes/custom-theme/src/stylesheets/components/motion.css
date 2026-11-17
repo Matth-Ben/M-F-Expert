@@ -41,6 +41,12 @@ html {
 	scroll-padding-top: calc(var(--header-h, 0px) + 1rem);
 }
 
+/* …except for the header's own controls: it is sticky, they are never under it. Without this, focusing
+   a header link (Tab, focus given back when the menu closes) makes the page jump up by that padding. */
+.site-header :is(a, button, input, select, textarea, [tabindex]) {
+	scroll-margin-top: calc((var(--header-h, 0px) + 1rem) * -1);
+}
+
 /* ---------------------------------------------------------------------------
  * Header link indicator: underline gliding to the current page's link.
  * ------------------------------------------------------------------------- */
@@ -327,7 +333,15 @@ html.is-navigating .page-curtain__loader {
 		translate: none;
 	}
 
-	.page-curtain {
-		display: none;
+	.page-curtain,
+	.quick-bar,
+	.btn--chat {
+		display: none !important;
+	}
+
+	/* FAQ: print every answer, open or not (browsers supporting ::details-content). */
+	.wpg-faq .wp-block-details::details-content {
+		content-visibility: visible;
+		block-size: auto;
 	}
 }

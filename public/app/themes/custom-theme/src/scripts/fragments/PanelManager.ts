@@ -152,7 +152,8 @@ export class PanelManager {
 		if (!this.isOpen) return;
 
 		this.hide();
-		this.trigger?.focus();
+		// No scroll: the trigger lives in the sticky header, it is already on screen.
+		this.trigger?.focus({ preventScroll: true });
 		this.trigger = null;
 	}
 

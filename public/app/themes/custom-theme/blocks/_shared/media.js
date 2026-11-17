@@ -16,7 +16,7 @@ import { store as coreStore } from '@wordpress/core-data';
  * @param {number|undefined} id
  */
 export function useMedia(id) {
-	return useSelect((select) => (id ? select(coreStore).getMedia(id, { context: 'view' }) : null), [id]);
+	return useSelect((select) => (id ? select(coreStore).getEntityRecord('postType', 'attachment', id, { context: 'view' }) : null), [id]);
 }
 
 /**

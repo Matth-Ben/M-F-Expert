@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/contact",
+	"version": "1.0.0",
+	"title": "Contact complet",
+	"category": "wpg",
+	"icon": "email-alt",
+	"description": "Formulaire de contact, coordonnées du salon (Réglages > Coordonnées), accès au chat et carte d’accès.",
+	"keywords": ["contact", "formulaire", "coordonnées", "carte", "adresse"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"formTitle": { "type": "string", "default": "Écrivez-nous" },
+		"consent": {
+			"type": "string",
+			"default": "[Mention RGPD à compléter : les informations saisies servent uniquement à répondre à votre demande.]"
+		},
+		"detailsTitle": { "type": "string", "default": "Nos coordonnées" },
+		"chatTitle": { "type": "string", "default": "Une question rapide&nbsp;?" },
+		"chatText": { "type": "string", "default": "Notre assistant répond à vos questions sur les prestations et les tarifs." },
+		"chatLabel": { "type": "string", "default": "Poser ma question" },
+		"mapUrl": { "type": "string", "default": "" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true,
+		"multiple": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

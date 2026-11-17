@@ -1,0 +1,333 @@
+/*
+ * Motion & micro-interactions (front).
+ *
+ * Unlayered on purpose: must win over the components' own transitions (button.css…) and WordPress CSS.
+ * Moves only use the individual `translate` / `scale` / `rotate` properties, so they never fight with a
+ * `transform` set elsewhere. Every movement is gated by prefers-reduced-motion; hover effects by (hover: hover)
+ * so touch screens never keep a « stuck » hover state.
+ *
+ * JS counterparts: src/scripts/utils/headroom.js, nav-indicator.js, reveal.js, barba.js.
+ */
+
+/* ---------------------------------------------------------------------------
+ * Headroom header: sticky navigation row, hidden while scrolling down.
+ * The announcement bar scrolls away (negative top = its height, measured in JS).
+ * ------------------------------------------------------------------------- */
+.site-header.is-headroom {
+	position: sticky;
+	top: calc(var(--announcement-h, 0px) * -1);
+	z-index: 50;
+	background-color: var(--color-beige);
+	transition: box-shadow 0.3s ease;
+}
+
+.site-header.is-scrolled {
+	box-shadow: 0 12px 30px -20px rgb(59 31 39 / 0.45);
+}
+
+.site-header.is-unpinned {
+	translate: 0 -100%;
+	box-shadow: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.site-header.is-headroom {
+		transition: translate 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+	}
+}
+
+/* A focused element or an anchor target never ends up under the sticky header (WCAG 2.4.11). */
+html {
+	scroll-padding-top: calc(var(--header-h, 0px) + 1rem);
+}
+
+/* ---------------------------------------------------------------------------
+ * Header link indicator: underline gliding to the current page's link.
+ * ------------------------------------------------------------------------- */
+.site-nav-wrap {
+	position: relative;
+}
+
+.site-nav__indicator {
+	position: absolute;
+	bottom: 0.5rem;
+	left: 0;
+	height: 2px;
+	border-radius: 2px;
+	background-color: var(--color-bordeaux);
+	opacity: 0;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.site-nav__indicator {
+		transition:
+			transform 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+			width 0.5s cubic-bezier(0.65, 0, 0.35, 1),
+			opacity 0.25s ease;
+	}
+}
+
+.site-nav__indicator.is-instant {
+	transition: none;
+}
+
+/* The indicator replaces the static underline of the current link (components/site.css). */
+.site-nav.has-indicator a[aria-current="page"] {
+	text-decoration-line: none;
+}
+
+/* Other links: thin underline drawn from the left on hover. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.site-nav.has-indicator a:not([aria-current]) {
+		background: linear-gradient(currentColor, currentColor) no-repeat left calc(100% - 0.5rem) / 0 1px;
+		transition: background-size 0.3s ease, color 0.2s ease;
+	}
+
+	.site-nav.has-indicator a:not([aria-current]):hover {
+		text-decoration-line: none;
+		background-size: 100% 1px;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+ * Page transition curtain (barba.js). Below the header (z 50) and the fixed contact bar (z 40).
+ * ------------------------------------------------------------------------- */
+.page-curtain {
+	position: fixed;
+	inset: 0;
+	z-index: 30;
+	display: grid;
+	place-items: center;
+	background-color: var(--color-beige);
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.page-curtain__loader {
+	display: flex;
+	gap: 0.5rem;
+	opacity: 0;
+}
+
+.page-curtain__loader i {
+	width: 0.625rem;
+	height: 0.625rem;
+	border-radius: 50%;
+	background-color: var(--color-bordeaux);
+}
+
+html.is-navigating {
+	cursor: progress;
+}
+
+/* The loader only shows up when the next page takes more than ~0.6 s to arrive. */
+html.is-navigating .page-curtain__loader {
+	animation: curtain-loader-in 0.2s 0.6s forwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html.is-navigating .page-curtain__loader i {
+		animation: curtain-dot 0.9s ease-in-out infinite;
+	}
+
+	html.is-navigating .page-curtain__loader i:nth-child(2) {
+		animation-delay: 0.15s;
+	}
+
+	html.is-navigating .page-curtain__loader i:nth-child(3) {
+		animation-delay: 0.3s;
+	}
+}
+
+@keyframes curtain-loader-in {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes curtain-dot {
+	0%,
+	80%,
+	100% {
+		scale: 0.6;
+		opacity: 0.4;
+	}
+
+	40% {
+		scale: 1;
+		opacity: 1;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+ * Scroll reveal (reveal.js adds .reveal, then .is-revealed when on screen).
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+	.reveal {
+		opacity: 0;
+		translate: 0 1.75rem;
+		transition:
+			opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay, 0s),
+			translate 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) var(--reveal-delay, 0s);
+	}
+
+	.reveal.is-revealed {
+		opacity: 1;
+		translate: none;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+ * Buttons: lift + soft shadow on hover, press on click, icon nudge.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+	.btn,
+	.wp-block-button .wp-block-button__link {
+		transition:
+			translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+			box-shadow 0.25s ease,
+			background-color 0.25s ease,
+			color 0.25s ease,
+			border-color 0.25s ease,
+			filter 0.25s ease;
+	}
+
+	.btn svg,
+	.wp-block-button .wp-block-button__link::before,
+	.wp-block-button .wp-block-button__link::after,
+	.link-arrow svg {
+		transition:
+			translate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+			rotate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+			scale 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.btn:hover,
+	.wp-block-button .wp-block-button__link:hover {
+		translate: 0 -2px;
+		box-shadow: 0 12px 24px -12px rgb(59 31 39 / 0.55);
+	}
+
+	.btn:active,
+	.wp-block-button .wp-block-button__link:active {
+		translate: none;
+		box-shadow: 0 4px 10px -6px rgb(59 31 39 / 0.5);
+		transition-duration: 0.08s;
+	}
+
+	/* Leading icon (phone, chat, mail…): small wiggle. Trailing arrow: slides right. */
+	.btn:hover svg:first-child,
+	.wp-block-button .wp-block-button__link:hover::before {
+		rotate: -10deg;
+		scale: 1.12;
+	}
+
+	.btn:hover svg:last-child:not(:first-child),
+	.wp-block-button .wp-block-button__link:hover::after,
+	.link-arrow:hover svg {
+		translate: 4px 0;
+	}
+}
+
+/* Outline buttons fill in bordeaux on hover (color change only: kept for everyone). */
+@media (hover: hover) {
+	.btn--outline:hover,
+	.wp-block-button.is-style-outline .wp-block-button__link:hover {
+		background-color: var(--color-bordeaux);
+		color: var(--color-cream);
+		filter: none;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+ * Content: clickable cards, accordion, social icons, form fields.
+ * ------------------------------------------------------------------------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	/* Article cards are links as a whole (stretched link): they lift and their picture zooms gently. */
+	.wpg-articles li {
+		transition: translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+	}
+
+	.wpg-articles li:hover,
+	.wpg-articles li:focus-within {
+		translate: 0 -4px;
+		box-shadow: 0 20px 36px -22px rgb(59 31 39 / 0.5);
+	}
+
+	.wpg-articles li img {
+		transition: scale 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.wpg-articles li:hover img {
+		scale: 1.05;
+	}
+
+	/* Social icons of the footer. */
+	.site-footer a.rounded-full {
+		transition: scale 0.25s ease, background-color 0.25s ease;
+	}
+
+	.site-footer a.rounded-full:hover {
+		scale: 1.08;
+	}
+}
+
+/* FAQ: the question row reacts to the pointer; the « + » turns smoothly (faq/style.css). */
+@media (hover: hover) {
+	.wpg-faq .wp-block-details > summary {
+		transition: background-color 0.2s ease;
+	}
+
+	.wpg-faq .wp-block-details > summary:hover {
+		background-color: rgb(118 59 72 / 0.06);
+	}
+}
+
+/* FAQ: the answer unfolds (browsers supporting ::details-content; others open instantly). */
+@supports selector(::details-content) {
+	@media (prefers-reduced-motion: no-preference) {
+		.wpg-faq .wp-block-details {
+			interpolate-size: allow-keywords;
+		}
+
+		.wpg-faq .wp-block-details::details-content {
+			block-size: 0;
+			overflow: clip;
+			transition:
+				block-size 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+				content-visibility 0.35s allow-discrete;
+		}
+
+		.wpg-faq .wp-block-details[open]::details-content {
+			block-size: auto;
+		}
+	}
+}
+
+/* Form fields: border and focus glide instead of snapping. */
+@media (prefers-reduced-motion: no-preference) {
+	.wpg-contact :is(input, textarea) {
+		transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+	}
+}
+
+/* Print / PDF: never print a section that has not been revealed yet. */
+@media print {
+	.reveal {
+		opacity: 1 !important;
+		translate: none !important;
+	}
+
+	.site-header.is-headroom {
+		position: static;
+		translate: none;
+	}
+
+	.page-curtain {
+		display: none;
+	}
+}

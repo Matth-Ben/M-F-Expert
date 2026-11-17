@@ -17,11 +17,12 @@ $namespace = is_singular() ? get_post_field( 'post_name' ) : ( is_front_page() ?
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class( "flex min-h-screen flex-col" ); ?>>
 	<?php wp_body_open(); ?>
 	<a class="screen-reader-shortcut" href="#content"><?php esc_html_e( 'Skip to content', 'wp-gutenberg' ); ?></a>
 
 	<?php get_template_part( 'parts/site-header' ); ?>
 
-	<main id="content" class="relative" data-barba="wrapper">
+	<?php // tabindex="-1": the skip link (and Barba, as a fallback) moves the focus here, not only the scroll. ?>
+	<main id="content" class="relative flex-1" data-barba="wrapper" tabindex="-1">
 		<div data-barba="container" data-barba-namespace="<?php echo esc_attr( $namespace ?: 'page' ); ?>">

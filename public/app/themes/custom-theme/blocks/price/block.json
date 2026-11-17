@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/price",
+	"version": "1.0.0",
+	"title": "Tarif",
+	"category": "wpg",
+	"icon": "tag",
+	"description": "Une ligne de tarif : icône, nom, description et prix (dans un bloc Tarifs).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/prices"],
+	"usesContext": ["wpg/pricesLayout", "wpg/pricesHeader"],
+	"attributes": {
+		"icon": { "type": "string", "enum": ["arrow", "calendar", "car", "chat", "check", "clock", "heart", "home", "mail", "phone", "pin", "plus", "quote", "search", "shield", "star", "users"], "default": "check" },
+		"price": { "type": "string", "default": "[PRIX]" },
+		"name": { "type": "string", "default": "" },
+		"description": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

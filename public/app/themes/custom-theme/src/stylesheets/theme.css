@@ -1,45 +1,76 @@
 /*
- * Design tokens.
+ * Design tokens — M&F Expert, design system v2 (« Flyer v2 »).
  *
  * Colors & spacing are defined ONCE in theme.json (so the editor offers them to the client)
  * and exposed to Tailwind here via the CSS variables WordPress generates.
- * Add a color in theme.json → map it below → `bg-primary`, `text-primary`… everywhere.
+ * Add a color in theme.json → map it below → `bg-bordeaux`, `text-ink`… everywhere.
+ *
+ * Contrast rules (DS v2 §02): text sits on beige, cream or bordeaux only.
+ * rose, gold and olive are decorative (never body text).
  */
 @theme inline {
 	--color-*: initial;
-	--color-black: var(--wp--preset--color--black);
+	--color-bordeaux: var(--wp--preset--color--bordeaux);
+	--color-rose: var(--wp--preset--color--rose);
+	--color-beige: var(--wp--preset--color--beige);
+	--color-cream: var(--wp--preset--color--cream);
 	--color-white: var(--wp--preset--color--white);
-	--color-light: var(--wp--preset--color--light);
-	--color-primary: var(--wp--preset--color--primary);
+	--color-ink: var(--wp--preset--color--ink);
+	--color-ink-soft: var(--wp--preset--color--ink-soft);
+	--color-accent: var(--wp--preset--color--accent);
+	--color-gold: var(--wp--preset--color--gold);
+	--color-gold-dark: var(--wp--preset--color--gold-dark);
+	--color-gold-light: var(--wp--preset--color--gold-light);
+	--color-gold-pale: var(--wp--preset--color--gold-pale);
+	--color-olive: var(--wp--preset--color--olive);
+	--color-olive-dark: var(--wp--preset--color--olive-dark);
+	--color-field: var(--wp--preset--color--field);
+	--color-transparent: transparent;
+	--color-current: currentColor;
 
+	/* Rythme : sm = petites respirations, md = bandeaux (56 → 96 px), lg = bas de section claire (64 → 110 px). */
 	--spacing-section-sm: var(--wp--preset--spacing--sm);
 	--spacing-section-md: var(--wp--preset--spacing--md);
 	--spacing-section-lg: var(--wp--preset--spacing--lg);
 }
 
 @theme {
-	--default-font-family: "FT Kunst Grotesk", sans-serif;
+	--font-sans: "Montserrat Variable", "Montserrat", ui-sans-serif, system-ui, sans-serif;
+	--font-serif: "DM Serif Display", Georgia, serif;
+	--font-script: "Caveat", cursive; /* Remplace « Buffalo » (charte) en attendant le fichier. */
+	--default-font-family: var(--font-sans);
 
-	/* Typographies — class `.h1` in components/typographies.css */
+	/* Typographies — classes in components/typographies.css */
 	--text-*: initial;
+	--text-xs: 0.8125rem; /* 13 */
+	--text-sm: 0.875rem; /* 14 */
+	--text-md: 0.9375rem; /* 15 */
+	--text-note: 0.96875rem; /* 15,5 — textes de cartes, listes à coches, coordonnées */
+	--text-base: 1rem; /* 16 */
+	--text-body: 1.0625rem; /* 17 */
+	--text-lg: 1.125rem; /* 18 */
+	--text-card: 1.1875rem; /* 19 — titres de cartes (utilitaire card-title) */
+	--text-xl: 1.3125rem; /* 21 — lead */
+	--text-2xl: 1.375rem; /* 22 — H3 */
+	--text-3xl: 1.5rem; /* 24 */
 
-	--text-xs: 0.75rem;
-	--text-sm: 0.875rem;
-	--text-base: 1rem;
-	--text-lg: 1.125rem;
-	--text-xl: 1.25rem;
+	/* Radii (DS v2 §07). */
+	--radius-btn: 1.125rem; /* 18 — buttons */
+	--radius-box: 1.375rem; /* 22 — questions, encarts, reassurance */
+	--radius-card: 1.625rem; /* 26 — light cards */
+	--radius-panel: 1.875rem; /* 30 — bordeaux cards, photos, forms */
+	--radius-cta: 2.25rem; /* 36 — CTA panels */
 
-	--text-h1-desktop: 3.75rem;
-	--text-h1-desktop--font-weight: 400;
-	--text-h1-desktop--line-height: 1;
+	--shadow-card: 0 18px 40px rgb(118 59 72 / 0.22);
+	--shadow-float: 0 14px 36px rgb(59 31 39 / 0.35);
+	--shadow-bar: 0 -8px 24px rgb(59 31 39 / 0.16);
 
-	--text-h1-mobile: 2.5rem;
-	--text-h1-mobile--font-weight: 400;
-	--text-h1-mobile--line-height: 1.2;
+	--container-site: 77.5rem; /* 1240 */
+	--container-read: 47.5rem; /* 760 */
 
-	--text-h2-desktop: 2.5rem;
-	--text-h2-desktop--line-height: 1.1;
-
-	--text-h2-mobile: 1.875rem;
-	--text-h2-mobile--line-height: 1.2;
+	/*
+	 * Full header navigation (six links + button) from 1200 px: below, it wraps on two lines
+	 * and the round menu button takes over (`nav:hidden` / `max-nav:hidden`, parts/site-header.php).
+	 */
+	--breakpoint-nav: 75rem;
 }

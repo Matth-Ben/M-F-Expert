@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/steps",
+	"version": "1.0.0",
+	"title": "Méthode en étapes",
+	"category": "wpg",
+	"icon": "editor-ol",
+	"description": "Bandeau crème : titre, introduction et étapes numérotées reliées par un pointillé.",
+	"keywords": ["étapes", "méthode", "processus", "numéros"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/step"],
+	"attributes": {
+		"title": { "type": "string", "default": "Notre méthode" },
+		"intro": { "type": "string", "default": "Quatre étapes, du diagnostic au protocole à suivre à la maison." },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

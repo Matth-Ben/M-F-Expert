@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/faq",
+	"version": "1.0.0",
+	"title": "Questions fréquentes",
+	"category": "wpg",
+	"icon": "editor-help",
+	"description": "Deux colonnes : titre, texte et accès au chat, puis l’accordéon des questions (blocs Détails).",
+	"keywords": ["faq", "questions", "accordéon", "conseils"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "Conseils" },
+		"title": { "type": "string", "default": "Conseils &amp; FAQ" },
+		"text": { "type": "string", "default": "Les réponses aux questions que vous vous posez." },
+		"chatLabel": { "type": "string", "default": "Une autre question ? Demandez au chat" },
+		"chatLabelMobile": { "type": "string", "default": "Une autre question ? Le chat" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

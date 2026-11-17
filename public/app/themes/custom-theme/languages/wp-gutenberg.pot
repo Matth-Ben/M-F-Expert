@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-16T16:53:55+00:00\n"
+"POT-Creation-Date: 2026-11-17T11:38:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: wp-gutenberg\n"
@@ -34,37 +34,349 @@ msgstr ""
 msgid "Back to home page"
 msgstr ""
 
-#: config/socials.php:12
+#: build/articles/render.php:124
+#: build/articles/index.js:1
+msgid "Read the article"
+msgstr ""
+
+#: build/contact/render.php:29
+#: config/contact.php:12
+#: includes/Admin/OptionsPage.php:81
+#: build/contact/index.js:1
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Phone"
+msgstr ""
+
+#: build/contact/render.php:30
+#: config/contact.php:16
+#: includes/Admin/OptionsPage.php:83
+#: parts/site-footer.php:15
+#: build/contact/index.js:1
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Email"
+msgstr ""
+
+#: build/contact/render.php:31
+#: config/contact.php:21
+#: parts/site-footer.php:12
+#: build/contact/index.js:1
+msgid "Address"
+msgstr ""
+
+#: build/contact/render.php:32
+#: config/contact.php:26
+#: parts/site-footer.php:13
+#: build/contact/index.js:1
+msgid "Opening hours"
+msgstr ""
+
+#: build/contact/render.php:33
+#: config/contact.php:30
+#: parts/site-footer.php:14
+#: build/contact/index.js:1
+msgid "Access & parking"
+msgstr ""
+
+#: build/contact/render.php:39
+#: build/contact/index.js:1
+msgid "Your name"
+msgstr ""
+
+#: build/contact/render.php:40
+#: build/contact/index.js:1
+msgid "Your email"
+msgstr ""
+
+#: build/contact/render.php:41
+#: build/contact/index.js:1
+msgid "Your phone (optional)"
+msgstr ""
+
+#: build/contact/render.php:42
+#: build/contact/index.js:1
+msgid "Your message"
+msgstr ""
+
+#: build/contact/render.php:46
+msgid "The page has expired. Please send your message again."
+msgstr ""
+
+#: build/contact/render.php:47
+msgid "Your message could not be sent because of a technical problem. Please try again, or contact us by phone or email."
+msgstr ""
+
+#: build/contact/render.php:48
+msgid "Your message has not been sent. Please correct the following fields:"
+msgstr ""
+
+#: build/contact/render.php:49
+msgid "Your message has not been sent. Please try again."
+msgstr ""
+
+#: build/contact/render.php:86
+#: parts/fragments/panels/menu.php:24
+#: build/contact/index.js:1
+msgid "Call us"
+msgstr ""
+
+#: build/contact/render.php:92
+msgid "Contact form"
+msgstr ""
+
+#: build/contact/render.php:107
+msgid "Thank you! Your message has been sent. We will get back to you as soon as possible."
+msgstr ""
+
+#. translators: %s: error message, or page title (contact form result)
+#: build/contact/render.php:155
+#: includes/Forms/ContactForm.php:73
+msgid "Error: %s"
+msgstr ""
+
+#: build/contact/render.php:163
+msgid "Leave this field empty"
+msgstr ""
+
+#: build/contact/render.php:175
+#: build/contact/index.js:1
+msgid "Send the message"
+msgstr ""
+
+#: build/contact/render.php:199
+#: build/contact/index.js:1
+msgid "Map: how to find the salon"
+msgstr ""
+
+#: build/hero/render.php:69
+#: build/hero/index.js:1
+msgid "Breadcrumb"
+msgstr ""
+
+#: build/hero/render.php:71
+#: build/hero/index.js:1
+msgid "Home"
+msgstr ""
+
+#: config/contact.php:34
+msgid "Chat link"
+msgstr ""
+
+#: config/contact.php:36
+msgid "Target of the “Une question ?” buttons. Defaults to the contact page."
+msgstr ""
+
+#: config/socials.php:5
 msgid "Facebook"
 msgstr ""
 
-#: config/socials.php:16
+#: config/socials.php:9
 msgid "Instagram"
-msgstr ""
-
-#: config/socials.php:19
-msgid "LinkedIn"
-msgstr ""
-
-#: config/socials.php:23
-msgid "Vimeo"
-msgstr ""
-
-#: config/socials.php:26
-msgid "X (Twitter)"
-msgstr ""
-
-#: config/socials.php:30
-msgid "YouTube"
 msgstr ""
 
 #: header.php:22
 msgid "Skip to content"
 msgstr ""
 
-#: includes/Admin/Socials.php:34
-#: includes/Admin/Socials.php:35
-msgid "Socials"
+#: includes/Admin/Announcement.php:16
+#: includes/Admin/Footer.php:47
+msgid "Display"
+msgstr ""
+
+#: includes/Admin/Announcement.php:18
+msgid "Show the announcement bar on the site"
+msgstr ""
+
+#: includes/Admin/Announcement.php:22
+msgid "Text"
+msgstr ""
+
+#: includes/Admin/Announcement.php:25
+msgid "One short sentence. Bold, italic and links only; line breaks are ignored."
+msgstr ""
+
+#: includes/Admin/Announcement.php:31
+msgid "Announcement bar"
+msgstr ""
+
+#: includes/Admin/Announcement.php:42
+msgid "The bar is displayed above the menu on every page: opening, holidays, exceptional closure…"
+msgstr ""
+
+#: includes/Admin/Contact.php:18
+#: includes/Admin/Footer.php:46
+#: build/contact/index.js:1
+msgid "Contact details"
+msgstr ""
+
+#: includes/Admin/Footer.php:19
+msgid "Address of the page. Leave empty to hide the icon."
+msgstr ""
+
+#: includes/Admin/Footer.php:25
+msgid "Social networks"
+msgstr ""
+
+#: includes/Admin/Footer.php:26
+msgid "Title"
+msgstr ""
+
+#: includes/Admin/Footer.php:36
+msgid "Tagline and button"
+msgstr ""
+
+#: includes/Admin/Footer.php:37
+msgid "Tagline"
+msgstr ""
+
+#: includes/Admin/Footer.php:40
+msgid "Handwritten sentence at the top of the footer. Leave empty to hide it."
+msgstr ""
+
+#: includes/Admin/Footer.php:43
+msgid "Show the button in the footer"
+msgstr ""
+
+#: includes/Admin/Footer.php:49
+msgid "Show the address, opening hours, access and email"
+msgstr ""
+
+#. translators: %s: URL of Settings > Contact details.
+#: includes/Admin/Footer.php:53
+msgid "They are edited in <a href=\"%s\">Settings > Contact details</a>."
+msgstr ""
+
+#: includes/Admin/Footer.php:61
+msgid "Bottom line"
+msgstr ""
+
+#: includes/Admin/Footer.php:62
+msgid "Copyright"
+msgstr ""
+
+#. translators: %s: URL of Appearance > Menus.
+#: includes/Admin/Footer.php:67
+msgid "Shown after « © year ». The legal links come from the menu placed in « Legals Menu » (<a href=\"%s\">Appearance > Menus</a>)."
+msgstr ""
+
+#: includes/Admin/Footer.php:76
+msgid "Footer"
+msgstr ""
+
+#: includes/Admin/Header.php:18
+msgid "Logo"
+msgstr ""
+
+#: includes/Admin/Header.php:19
+msgid "Logo image"
+msgstr ""
+
+#: includes/Admin/Header.php:21
+msgid "Replaces the emblem (two children and a comb) in the header and in the large logos of the page headers. Transparent PNG or WebP, at least 600 px wide."
+msgstr ""
+
+#: includes/Admin/Header.php:24
+msgid "Text next to the logo"
+msgstr ""
+
+#: includes/Admin/Header.php:27
+msgid "Leave empty to show the image only."
+msgstr ""
+
+#: includes/Admin/Header.php:30
+#: includes/Admin/OptionsPage.php:60
+msgid "Button"
+msgstr ""
+
+#: includes/Admin/Header.php:30
+msgid "Show the button in the header (desktop)"
+msgstr ""
+
+#: includes/Admin/Header.php:35
+msgid "Header"
+msgstr ""
+
+#. translators: %s: URL of Appearance > Menus.
+#: includes/Admin/Header.php:48
+msgid "The menu links are edited in <a href=\"%s\">Appearance > Menus</a>."
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:66
+msgid "Button text"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:71
+#: build/prices/index.js:1
+msgid "Button link"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:74
+msgid "<code>#appeler</code>: phone number of Settings > Contact details · <code>#chat</code>: chat link · or a page address (<code>/contact/</code>) or a full URL (<code>https://…</code>)."
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:77
+msgid "Button icon"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:82
+#: parts/site-footer.php:109
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Chat"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:84
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Calendar"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:85
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Location"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:86
+msgid "No icon"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:267
+msgid "Use this image"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:270
+msgid "Choose an image"
+msgstr ""
+
+#: includes/Admin/OptionsPage.php:271
+msgid "Use the default image"
 msgstr ""
 
 #: includes/Core/Assets.php:68
@@ -79,24 +391,70 @@ msgstr ""
 msgid "Unable to load panel content."
 msgstr ""
 
-#: includes/Core/Setup.php:68
+#: includes/Core/Setup.php:67
 msgid "Main Menu"
 msgstr ""
 
-#: includes/Core/Setup.php:69
+#: includes/Core/Setup.php:68
 msgid "Secondary Menu"
 msgstr ""
 
-#: includes/Core/Setup.php:70
+#: includes/Core/Setup.php:69
 msgid "Footer Menu"
 msgstr ""
 
-#: includes/Core/Setup.php:71
+#: includes/Core/Setup.php:70
 msgid "Legals Menu"
 msgstr ""
 
-#: includes/Editor/Blocks.php:66
+#: includes/Editor/Blocks.php:89
 msgid "Site blocks"
+msgstr ""
+
+#. translators: %s: page title
+#: includes/Forms/ContactForm.php:71
+msgid "Message sent: %s"
+msgstr ""
+
+#: includes/Forms/ContactForm.php:166
+msgid "Please enter your name."
+msgstr ""
+
+#: includes/Forms/ContactForm.php:170
+msgid "Please enter a valid email address (e.g. name@example.com)."
+msgstr ""
+
+#: includes/Forms/ContactForm.php:174
+msgid "Please enter a valid phone number, or leave this field empty."
+msgstr ""
+
+#: includes/Forms/ContactForm.php:178
+msgid "Please enter your message."
+msgstr ""
+
+#. translators: 1: site name, 2: visitor name
+#: includes/Forms/ContactForm.php:200
+msgid "[%1$s] New message from %2$s"
+msgstr ""
+
+#. translators: %s: visitor name
+#: includes/Forms/ContactForm.php:206
+msgid "Name: %s"
+msgstr ""
+
+#. translators: %s: visitor email
+#: includes/Forms/ContactForm.php:208
+msgid "Email: %s"
+msgstr ""
+
+#. translators: %s: visitor phone
+#: includes/Forms/ContactForm.php:210
+msgid "Phone: %s"
+msgstr ""
+
+#. translators: %s: page URL
+#: includes/Forms/ContactForm.php:216
+msgid "Sent from the contact form: %s"
 msgstr ""
 
 #: includes/Fragments/Rest.php:127
@@ -105,6 +463,11 @@ msgstr ""
 
 #: includes/Fragments/Rest.php:137
 msgid "Invalid referer."
+msgstr ""
+
+#: includes/helpers.php:50
+#: build/hero/index.js:1
+msgid "M&F Expert logo: two children and a comb"
 msgstr ""
 
 #. translators: %s: search query.
@@ -128,15 +491,35 @@ msgstr ""
 msgid "No posts found."
 msgstr ""
 
+#: parts/components/badge.php:14
+#: build/family/index.js:1
+#: build/service-family/index.js:1
+msgid "NEW"
+msgstr ""
+
+#: parts/components/badge.php:14
+#: build/family/index.js:1
+#: build/service-family/index.js:1
+msgid "in"
+msgstr ""
+
+#: parts/components/badge.php:14
+#: build/family/index.js:1
+#: build/service-family/index.js:1
+msgid "VIRIAT"
+msgstr ""
+
 #: parts/fragments/panels/filters.php:14
 msgid "Filters"
 msgstr ""
 
 #: parts/fragments/panels/filters.php:19
+#: build/articles/index.js:1
 msgid "Category"
 msgstr ""
 
 #: parts/fragments/panels/filters.php:21
+#: build/articles/index.js:1
 msgid "All categories"
 msgstr ""
 
@@ -148,17 +531,58 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: parts/fragments/panels/menu.php:12
-msgid "Panel menu"
+#: parts/fragments/panels/menu.php:8
+#: parts/site-header.php:27
+msgid "Main navigation"
 msgstr ""
 
-#: parts/fragments/panels/menu.php:14
-#: parts/site-header.php:17
+#: parts/fragments/panels/menu.php:10
 msgid "Menu"
 msgstr ""
 
-#: parts/site-header.php:16
+#: parts/site-footer.php:70
+msgid "Legal information"
+msgstr ""
+
+#. translators: %s: social network
+#: parts/site-footer.php:85
+msgid "%s (new window)"
+msgstr ""
+
+#: parts/site-footer.php:98
+msgid "A question?"
+msgstr ""
+
+#: parts/site-footer.php:102
+msgid "Quick contact"
+msgstr ""
+
+#: parts/site-footer.php:105
+msgid "Call"
+msgstr ""
+
+#: parts/site-header.php:41
 msgid "Open menu"
+msgstr ""
+
+#: patterns/conseils.php
+msgctxt "Pattern title"
+msgid "Conseils & FAQ"
+msgstr ""
+
+#: patterns/conseils.php
+msgctxt "Pattern description"
+msgid "Conseils v2 : articles, citation, questions fréquentes, appel à l'action."
+msgstr ""
+
+#: patterns/contact.php
+msgctxt "Pattern title"
+msgid "Contact"
+msgstr ""
+
+#: patterns/contact.php
+msgctxt "Pattern description"
+msgid "Contact v2 : formulaire, coordonnées, question rapide, carte."
 msgstr ""
 
 #: patterns/home.php
@@ -168,55 +592,407 @@ msgstr ""
 
 #: patterns/home.php
 msgctxt "Pattern description"
-msgid "Hero + texte/image + chiffres clés."
+msgid "Accueil v2 : hero, réassurance, accroche, prestations, méthode, bienvenue, tarifs, différence, FAQ."
 msgstr ""
 
-#: build/hero/index.js:1
+#: patterns/nos-prestations.php
+msgctxt "Pattern title"
+msgid "Nos prestations"
+msgstr ""
+
+#: patterns/nos-prestations.php
+msgctxt "Pattern description"
+msgid "Prestations v2 : réassurance, prestations détaillées, déroulé d'une visite, inclus, appel à l'action."
+msgstr ""
+
+#: patterns/qui-sommes-nous.php
+msgctxt "Pattern title"
+msgid "Qui sommes-nous ?"
+msgstr ""
+
+#: patterns/qui-sommes-nous.php
+msgctxt "Pattern description"
+msgid "Qui sommes-nous v2 : bienvenue, différence, toute la famille, équipe, appel à l'action."
+msgstr ""
+
+#: patterns/tarifs.php
+msgctxt "Pattern title"
+msgid "Tarifs"
+msgstr ""
+
+#: patterns/tarifs.php
+msgctxt "Pattern description"
+msgid "Tarifs v2 : liste de tarifs, inclus, réserver et régler, appel à l'action."
+msgstr ""
+
+#: build/articles/index.js:1
+msgid "Articles"
+msgstr ""
+
+#: build/articles/index.js:1
+msgid "Number of articles"
+msgstr ""
+
+#: build/articles/index.js:1
+#: build/faq/index.js:1
+#: build/quote-band/index.js:1
+#: build/text-media/index.js:1
+msgid "Eyebrow (optional)…"
+msgstr ""
+
+#: build/articles/index.js:1
+#: build/contact/index.js:1
+#: build/cta/index.js:1
+#: build/difference/index.js:1
+#: build/family/index.js:1
+#: build/faq/index.js:1
+#: build/included/index.js:1
+#: build/info-box/index.js:1
+#: build/prices/index.js:1
+#: build/services/index.js:1
+#: build/steps/index.js:1
+#: build/team/index.js:1
+msgid "Title…"
+msgstr ""
+
+#: build/articles/index.js:1
+msgid "No published article yet: this block stays hidden on the site until one is published."
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Map"
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Map embed URL"
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "OpenStreetMap or Google Maps: Share > Embed a map, then paste the link (or the whole <iframe> code). Must start with https://. Leave empty to hide the map."
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Phone, email, address, opening hours and access are edited in Settings > Contact details."
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Privacy notice (GDPR)…"
+msgstr ""
+
+#: build/contact/index.js:1
+#: build/cta/index.js:1
+#: build/faq/index.js:1
+#: build/text-media/index.js:1
+msgid "Text…"
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Button label…"
+msgstr ""
+
+#: build/contact/index.js:1
+msgid "Paste the map embed URL in the block settings (sidebar). Nothing is shown on the site while it is empty."
+msgstr ""
+
+#: build/difference/index.js:1
+msgid "Text (bold = key word in gold)…"
+msgstr ""
+
+#: build/family/index.js:1
+#: build/team-member/index.js:1
 #: build/text-media/index.js:1
 msgid "Image"
 msgstr ""
 
-#: build/hero/index.js:1
+#: build/family/index.js:1
+#: build/team-member/index.js:1
 #: build/text-media/index.js:1
 msgid "Replace image"
 msgstr ""
 
-#: build/hero/index.js:1
+#: build/family/index.js:1
+#: build/team-member/index.js:1
 #: build/text-media/index.js:1
 msgid "Select image"
 msgstr ""
 
-#: build/hero/index.js:1
+#: build/family/index.js:1
+#: build/team-member/index.js:1
 #: build/text-media/index.js:1
 msgid "Remove image"
 msgstr ""
 
-#: build/hero/index.js:1
-msgid "Learn more"
+#: build/family/index.js:1
+msgid "Badge"
+msgstr ""
+
+#: build/family/index.js:1
+msgid "Show the « NEW in VIRIAT » badge"
+msgstr ""
+
+#: build/family/index.js:1
+#: build/services/index.js:1
+msgid "Eyebrow…"
+msgstr ""
+
+#: build/faq/index.js:1
+msgid "Chat button label (mobile)…"
+msgstr ""
+
+#: build/faq/index.js:1
+msgid "Chat button label…"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Arrow"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Car"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Check mark"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Clock"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Heart"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "House"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Plus"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Quote"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Magnifying glass"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Shield"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Star"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/prices/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "People"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/info-box/index.js:1
+#: build/price/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+msgid "Icon"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/service-family/index.js:1
+#: build/service/index.js:1
+msgid "Card"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/service-family/index.js:1
+msgid "Card title…"
+msgstr ""
+
+#: build/feature/index.js:1
+#: build/service-family/index.js:1
+msgid "Short text…"
 msgstr ""
 
 #: build/hero/index.js:1
-msgid "Animations"
+#: build/prices/index.js:1
+#: build/section/index.js:1
+#: build/services/index.js:1
+msgid "Layout"
 msgstr ""
 
 #: build/hero/index.js:1
-msgid "Image parallax"
+msgid "Hero type"
 msgstr ""
 
 #: build/hero/index.js:1
-msgid "Animated title"
+msgid "Inner page (breadcrumb, title, intro)"
 msgstr ""
 
 #: build/hero/index.js:1
-msgid "Hero title…"
+msgid "Home page (logo, signature, buttons)"
 msgstr ""
 
 #: build/hero/index.js:1
+msgid "Logo text"
+msgstr ""
+
+#: build/hero/index.js:1
+msgid "Leave empty to use the site name."
+msgstr ""
+
+#: build/hero/index.js:1
+msgid "Subtitle…"
+msgstr ""
+
+#: build/hero/index.js:1
+#: build/tagline/index.js:1
+msgid "Signature…"
+msgstr ""
+
+#: build/hero/index.js:1
+msgid "Page title…"
+msgstr ""
+
+#: build/hero/index.js:1
+#: build/prices/index.js:1
+#: build/steps/index.js:1
 msgid "Introduction text…"
 msgstr ""
 
-#: build/section/index.js:1
-msgid "Layout"
+#: build/info-box/index.js:1
+msgid "Box"
+msgstr ""
+
+#: build/price/index.js:1
+msgid "Price"
+msgstr ""
+
+#: build/price/index.js:1
+msgid "Service name…"
+msgstr ""
+
+#: build/price/index.js:1
+msgid "Short description…"
+msgstr ""
+
+#: build/price/index.js:1
+msgid "Price…"
+msgstr ""
+
+#: build/prices/index.js:1
+#: build/services/index.js:1
+msgid "Settings"
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "Cards (home page)"
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "List on two columns"
+msgstr ""
+
+#: build/prices/index.js:1
+#: build/services/index.js:1
+msgid "Show the section header"
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "Without a header, price names become level 2 headings."
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "Leave empty to call the phone number set in Settings > Contact details."
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "Note (optional)…"
+msgstr ""
+
+#: build/prices/index.js:1
+msgid "Button text…"
+msgstr ""
+
+#: build/quote-band/index.js:1
+msgid "Quote…"
+msgstr ""
+
+#: build/quote-band/index.js:1
+msgid "Signature (optional)…"
 msgstr ""
 
 #: build/section/index.js:1
@@ -229,6 +1005,52 @@ msgstr ""
 
 #: build/section/index.js:1
 msgid "Narrow"
+msgstr ""
+
+#: build/service-family/index.js:1
+msgid "Show the “NEW in VIRIAT” badge"
+msgstr ""
+
+#: build/service/index.js:1
+msgid "Short description of the service…"
+msgstr ""
+
+#: build/service/index.js:1
+msgid "Key point…"
+msgstr ""
+
+#: build/service/index.js:1
+msgid "Card link"
+msgstr ""
+
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "The link is hidden on the site while no URL is set."
+msgstr ""
+
+#: build/service/index.js:1
+msgid "Service title…"
+msgstr ""
+
+#: build/service/index.js:1
+#: build/services/index.js:1
+msgid "Link text…"
+msgstr ""
+
+#: build/services/index.js:1
+msgid "Grid of three cards (home page)"
+msgstr ""
+
+#: build/services/index.js:1
+msgid "Detailed cards, family card full width"
+msgstr ""
+
+#: build/services/index.js:1
+msgid "Without a header, card titles become level 2 headings."
+msgstr ""
+
+#: build/services/index.js:1
+msgid "Header link"
 msgstr ""
 
 #: build/stat/index.js:1
@@ -251,20 +1073,252 @@ msgstr ""
 msgid "Label…"
 msgstr ""
 
-#: build/text-media/index.js:1
-msgid "Title"
+#: build/step/index.js:1
+msgid "Step title…"
+msgstr ""
+
+#: build/step/index.js:1
+msgid "One sentence describing the step…"
+msgstr ""
+
+#: build/tagline/index.js:1
+msgid "Catchphrase…"
+msgstr ""
+
+#: build/tagline/index.js:1
+msgid "Bold text…"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "Portrait"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "Replace portrait"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "Select portrait"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "First and last name…"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "Role…"
+msgstr ""
+
+#: build/team-member/index.js:1
+msgid "A few lines of introduction…"
 msgstr ""
 
 #: build/text-media/index.js:1
-msgid "Text…"
+msgid "Handwritten signature…"
 msgstr ""
 
 #: build/text-media/index.js:1
 msgid "Flip image side"
 msgstr ""
 
+#: build/text-media/index.js:1
+msgid "Title (optional)…"
+msgstr ""
+
 #: build/_editor/index.js:1
-msgid "Arrow"
+msgid "Light (on bordeaux)"
+msgstr ""
+
+#: build/articles/block.json
+msgctxt "block title"
+msgid "Articles de conseils"
+msgstr ""
+
+#: build/articles/block.json
+msgctxt "block description"
+msgid "Grille des derniers articles (conseils) : vignette, catégorie, titre, extrait et lien. Masqué tant qu’aucun article n’est publié."
+msgstr ""
+
+#: build/articles/block.json
+msgctxt "block keyword"
+msgid "articles"
+msgstr ""
+
+#: build/articles/block.json
+#: build/faq/block.json
+msgctxt "block keyword"
+msgid "conseils"
+msgstr ""
+
+#: build/articles/block.json
+msgctxt "block keyword"
+msgid "blog"
+msgstr ""
+
+#: build/articles/block.json
+msgctxt "block keyword"
+msgid "actualités"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block title"
+msgid "Contact complet"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block description"
+msgid "Formulaire de contact, coordonnées du salon (Réglages > Coordonnées), accès au chat et carte d’accès."
+msgstr ""
+
+#: build/contact/block.json
+#: build/cta/block.json
+msgctxt "block keyword"
+msgid "contact"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block keyword"
+msgid "formulaire"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block keyword"
+msgid "coordonnées"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block keyword"
+msgid "carte"
+msgstr ""
+
+#: build/contact/block.json
+msgctxt "block keyword"
+msgid "adresse"
+msgstr ""
+
+#: build/cta/block.json
+msgctxt "block title"
+msgid "Appel à l'action"
+msgstr ""
+
+#: build/cta/block.json
+msgctxt "block description"
+msgid "Panneau crème d'invitation : titre manuscrit, phrase d'accroche et boutons (appeler, poser une question)."
+msgstr ""
+
+#: build/cta/block.json
+msgctxt "block keyword"
+msgid "appel"
+msgstr ""
+
+#: build/cta/block.json
+msgctxt "block keyword"
+msgid "boutons"
+msgstr ""
+
+#: build/cta/block.json
+msgctxt "block keyword"
+msgid "rencontrer"
+msgstr ""
+
+#: build/difference/block.json
+msgctxt "block title"
+msgid "Notre différence"
+msgstr ""
+
+#: build/difference/block.json
+msgctxt "block description"
+msgid "Bandeau bordeaux : titre, encart encadré avec mot clé doré, bouton facultatif et quatre arguments en cartes."
+msgstr ""
+
+#: build/difference/block.json
+msgctxt "block keyword"
+msgid "différence"
+msgstr ""
+
+#: build/difference/block.json
+#: build/included/block.json
+#: build/reassurance/block.json
+msgctxt "block keyword"
+msgid "arguments"
+msgstr ""
+
+#: build/difference/block.json
+msgctxt "block keyword"
+msgid "protocole"
+msgstr ""
+
+#: build/difference/block.json
+#: build/quote-band/block.json
+#: build/reassurance/block.json
+msgctxt "block keyword"
+msgid "bandeau"
+msgstr ""
+
+#: build/family/block.json
+msgctxt "block title"
+msgid "Toute la famille"
+msgstr ""
+
+#: build/family/block.json
+msgctxt "block description"
+msgid "Bandeau crème : photo encadrée avec badge « NOUVEAU sur VIRIAT », surtitre, titre manuscrit, texte et liste à coches."
+msgstr ""
+
+#: build/family/block.json
+msgctxt "block keyword"
+msgid "famille"
+msgstr ""
+
+#: build/family/block.json
+msgctxt "block keyword"
+msgid "photo"
+msgstr ""
+
+#: build/family/block.json
+msgctxt "block keyword"
+msgid "badge"
+msgstr ""
+
+#: build/family/block.json
+#: build/reassurance/block.json
+msgctxt "block keyword"
+msgid "coches"
+msgstr ""
+
+#: build/faq/block.json
+msgctxt "block title"
+msgid "Questions fréquentes"
+msgstr ""
+
+#: build/faq/block.json
+msgctxt "block description"
+msgid "Deux colonnes : titre, texte et accès au chat, puis l’accordéon des questions (blocs Détails)."
+msgstr ""
+
+#: build/faq/block.json
+msgctxt "block keyword"
+msgid "faq"
+msgstr ""
+
+#: build/faq/block.json
+msgctxt "block keyword"
+msgid "questions"
+msgstr ""
+
+#: build/faq/block.json
+msgctxt "block keyword"
+msgid "accordéon"
+msgstr ""
+
+#: build/feature/block.json
+msgctxt "block title"
+msgid "Argument inclus"
+msgstr ""
+
+#: build/feature/block.json
+msgctxt "block description"
+msgid "Carte crème : icône, titre et texte (dans un bloc Inclus dans chaque prestation)."
 msgstr ""
 
 #: build/hero/block.json
@@ -274,7 +1328,7 @@ msgstr ""
 
 #: build/hero/block.json
 msgctxt "block description"
-msgid "Grand visuel d'en-tête avec titre, texte et boutons."
+msgid "En-tête de page, toujours en haut. Accueil : logo-texte, signature, boutons et grand logo. Page intérieure : fil d'Ariane, titre (titre de la page par défaut), filet et texte d'introduction."
 msgstr ""
 
 #: build/hero/block.json
@@ -297,6 +1351,145 @@ msgctxt "block keyword"
 msgid "en-tête"
 msgstr ""
 
+#: build/hero/block.json
+msgctxt "block keyword"
+msgid "fil d'Ariane"
+msgstr ""
+
+#: build/included/block.json
+msgctxt "block title"
+msgid "Inclus dans chaque prestation"
+msgstr ""
+
+#: build/included/block.json
+msgctxt "block description"
+msgid "Bandeau bordeaux : titre et cartes de réassurance (icône, titre, texte)."
+msgstr ""
+
+#: build/included/block.json
+msgctxt "block keyword"
+msgid "inclus"
+msgstr ""
+
+#: build/included/block.json
+msgctxt "block keyword"
+msgid "réassurance"
+msgstr ""
+
+#: build/included/block.json
+#: build/reassurance/block.json
+msgctxt "block keyword"
+msgid "avantages"
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block title"
+msgid "Encart d’information"
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block description"
+msgid "Encart crème d’information pratique : icône, titre et texte (ex. « Réserver et régler »)."
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block keyword"
+msgid "encart"
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block keyword"
+msgid "information"
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block keyword"
+msgid "réservation"
+msgstr ""
+
+#: build/info-box/block.json
+msgctxt "block keyword"
+msgid "paiement"
+msgstr ""
+
+#: build/price/block.json
+msgctxt "block title"
+msgid "Tarif"
+msgstr ""
+
+#: build/price/block.json
+msgctxt "block description"
+msgid "Une ligne de tarif : icône, nom, description et prix (dans un bloc Tarifs)."
+msgstr ""
+
+#: build/prices/block.json
+msgctxt "block title"
+msgid "Tarifs"
+msgstr ""
+
+#: build/prices/block.json
+msgctxt "block description"
+msgid "Grille de tarifs en cartes (accueil) ou en liste sur deux colonnes, avec une mention et un bouton d’appel."
+msgstr ""
+
+#: build/prices/block.json
+msgctxt "block keyword"
+msgid "tarifs"
+msgstr ""
+
+#: build/prices/block.json
+msgctxt "block keyword"
+msgid "prix"
+msgstr ""
+
+#: build/prices/block.json
+msgctxt "block keyword"
+msgid "grille"
+msgstr ""
+
+#: build/prices/block.json
+#: build/services/block.json
+msgctxt "block keyword"
+msgid "prestations"
+msgstr ""
+
+#: build/quote-band/block.json
+msgctxt "block title"
+msgid "Citation en bandeau"
+msgstr ""
+
+#: build/quote-band/block.json
+msgctxt "block description"
+msgid "Bandeau bordeaux pleine largeur : surtitre, phrase forte en citation et signature manuscrite."
+msgstr ""
+
+#: build/quote-band/block.json
+msgctxt "block keyword"
+msgid "citation"
+msgstr ""
+
+#: build/quote-band/block.json
+#: build/tagline/block.json
+msgctxt "block keyword"
+msgid "phrase"
+msgstr ""
+
+#: build/quote-band/block.json
+#: build/tagline/block.json
+msgctxt "block keyword"
+msgid "slogan"
+msgstr ""
+
+#: build/reassurance/block.json
+msgctxt "block title"
+msgid "Réassurance"
+msgstr ""
+
+#: build/reassurance/block.json
+msgctxt "block description"
+msgid "Bandeau crème de trois arguments courts avec coche. Placé juste sous le hero, il se colle à lui."
+msgstr ""
+
 #: build/section/block.json
 msgctxt "block title"
 msgid "Section"
@@ -305,6 +1498,51 @@ msgstr ""
 #: build/section/block.json
 msgctxt "block description"
 msgid "Conteneur pleine largeur : fond, espacements et largeur de contenu."
+msgstr ""
+
+#: build/service-family/block.json
+msgctxt "block title"
+msgid "Carte « Toute la famille »"
+msgstr ""
+
+#: build/service-family/block.json
+msgctxt "block description"
+msgid "Carte claire avec icône, titre manuscrit, texte et badge « NOUVEAU sur VIRIAT » (dans un bloc Prestations). Pleine largeur en mise en page détaillée."
+msgstr ""
+
+#: build/service/block.json
+msgctxt "block title"
+msgid "Carte de prestation"
+msgstr ""
+
+#: build/service/block.json
+msgctxt "block description"
+msgid "Carte bordeaux : icône, titre manuscrit, texte, points clés et lien (dans un bloc Prestations)."
+msgstr ""
+
+#: build/services/block.json
+msgctxt "block title"
+msgid "Prestations"
+msgstr ""
+
+#: build/services/block.json
+msgctxt "block description"
+msgid "En-tête (surtitre, titre, lien) et cartes de prestations : grille de trois cartes (accueil) ou cartes détaillées avec la carte famille en pleine largeur."
+msgstr ""
+
+#: build/services/block.json
+msgctxt "block keyword"
+msgid "services"
+msgstr ""
+
+#: build/services/block.json
+msgctxt "block keyword"
+msgid "offre"
+msgstr ""
+
+#: build/services/block.json
+msgctxt "block keyword"
+msgid "cartes"
 msgstr ""
 
 #: build/stat/block.json
@@ -347,6 +1585,106 @@ msgctxt "block keyword"
 msgid "stats"
 msgstr ""
 
+#: build/step/block.json
+msgctxt "block title"
+msgid "Étape"
+msgstr ""
+
+#: build/step/block.json
+msgctxt "block description"
+msgid "Une étape numérotée automatiquement (dans un bloc Méthode en étapes)."
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block title"
+msgid "Méthode en étapes"
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block description"
+msgid "Bandeau crème : titre, introduction et étapes numérotées reliées par un pointillé."
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block keyword"
+msgid "étapes"
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block keyword"
+msgid "méthode"
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block keyword"
+msgid "processus"
+msgstr ""
+
+#: build/steps/block.json
+msgctxt "block keyword"
+msgid "numéros"
+msgstr ""
+
+#: build/tagline/block.json
+msgctxt "block title"
+msgid "Accroche"
+msgstr ""
+
+#: build/tagline/block.json
+msgctxt "block description"
+msgid "Phrase d'accroche centrée sur trois lignes : grande phrase, texte en gras, signature manuscrite."
+msgstr ""
+
+#: build/tagline/block.json
+msgctxt "block keyword"
+msgid "accroche"
+msgstr ""
+
+#: build/tagline/block.json
+msgctxt "block keyword"
+msgid "signature"
+msgstr ""
+
+#: build/team-member/block.json
+msgctxt "block title"
+msgid "Membre de l’équipe"
+msgstr ""
+
+#: build/team-member/block.json
+msgctxt "block description"
+msgid "Portrait rond, nom, rôle et courte présentation (dans un bloc Équipe)."
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block title"
+msgid "Équipe"
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block description"
+msgid "Titre et cartes de présentation des membres de l’équipe (portrait, nom, rôle, présentation)."
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block keyword"
+msgid "équipe"
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block keyword"
+msgid "membres"
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block keyword"
+msgid "portrait"
+msgstr ""
+
+#: build/team/block.json
+msgctxt "block keyword"
+msgid "personnes"
+msgstr ""
+
 #: build/text-media/block.json
 msgctxt "block title"
 msgid "Texte + image"
@@ -354,7 +1692,7 @@ msgstr ""
 
 #: build/text-media/block.json
 msgctxt "block description"
-msgid "Image et contenu côte à côte, image à gauche ou à droite."
+msgid "Présentation avec photo encadrée : surtitre, grand titre, textes, signature manuscrite et bouton. Photo à gauche ou à droite (au-dessus du texte sur mobile)."
 msgstr ""
 
 #: build/text-media/block.json
@@ -372,9 +1710,34 @@ msgctxt "block keyword"
 msgid "texte"
 msgstr ""
 
+#: build/text-media/block.json
+msgctxt "block keyword"
+msgid "bienvenue"
+msgstr ""
+
+#: build/text-media/block.json
+msgctxt "block keyword"
+msgid "présentation"
+msgstr ""
+
 #: theme.json
 msgctxt "Color name"
-msgid "Noir"
+msgid "Bordeaux"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Rose poudré"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Beige"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Crème"
 msgstr ""
 
 #: theme.json
@@ -384,12 +1747,52 @@ msgstr ""
 
 #: theme.json
 msgctxt "Color name"
-msgid "Gris clair"
+msgid "Encre"
 msgstr ""
 
 #: theme.json
 msgctxt "Color name"
-msgid "Primaire"
+msgid "Encre douce"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accroche"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Or"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Or foncé"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Or clair"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Or très clair"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Olive"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Olive foncé"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Bord de champ"
 msgstr ""
 
 #: theme.json

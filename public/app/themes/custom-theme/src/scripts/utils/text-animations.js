@@ -20,6 +20,11 @@ export const initTextAnimations = () => {
     // Clean up previous animations and observers
     cleanup();
 
+    // Reduced motion: no split, the text stays as written (and visible).
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     // Find all elements with data-text-split attribute
     const elements = document.querySelectorAll('[data-text-split]');
 

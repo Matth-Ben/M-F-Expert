@@ -1,4 +1,4 @@
-# WP Gutenberg
+# M&F Expert (base WP Gutenberg)
 
 Projet WordPress basé sur l'éditeur de blocs (Gutenberg) : Composer pour WordPress et les plugins, thème PHP natif + blocs Gutenberg dynamiques, Vite + Tailwind v4.
 
@@ -24,17 +24,17 @@ pnpm build                      # ou `pnpm dev` en développement
 Base de données locale (voir `/var/www/sites/README-local-wp.md`) :
 
 ```bash
-sudo mysql -e "CREATE DATABASE wp_gutenberg DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'wp_gutenberg'@'localhost' IDENTIFIED BY 'MOT_DE_PASSE';
-GRANT ALL PRIVILEGES ON wp_gutenberg.* TO 'wp_gutenberg'@'localhost'; FLUSH PRIVILEGES;"
+sudo mysql -e "CREATE DATABASE mfexpert DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'mfexpert'@'localhost' IDENTIFIED BY 'MOT_DE_PASSE';
+GRANT ALL PRIVILEGES ON mfexpert.* TO 'mfexpert'@'localhost'; FLUSH PRIVILEGES;"
 ```
 
-Puis `https://wp-gutenberg.local/wordpress/wp-admin/install.php` et activer le thème **WP Gutenberg**.
+Puis `https://mfexpert.local/wordpress/wp-admin/install.php` et activer le thème **WP Gutenberg**.
 
 ## Structure
 
 ```
-wp-gutenberg/
+mfexpert/
 ├── public/
 │   ├── index.php / wp-config.php   (lit .env)
 │   ├── wordpress/                  Core (Composer, non versionné)

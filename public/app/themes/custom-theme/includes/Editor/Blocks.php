@@ -28,6 +28,29 @@ final class Blocks {
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_blocks' ) );
 		add_filter( 'block_categories_all', array( $this, 'register_category' ) );
+		add_filter( 'render_block_core/list', array( $this, 'check_list_role' ), 10, 2 );
+	}
+
+	/**
+	 * `.check-list` lists (core/list, shared.css) have `list-style: none` + CSS checks: Safari/VoiceOver then
+	 * stops announcing them as lists. role="list" keeps the semantics, like the theme's own lists.
+	 *
+	 * @param string               $html  Block output.
+	 * @param array<string, mixed> $block Parsed block.
+	 * @return string
+	 */
+	public function check_list_role( string $html, array $block ): string {
+		if ( ! str_contains( (string) ( $block['attrs']['className'] ?? '' ), 'check-list' ) ) {
+			return $html;
+		}
+
+		$tags = new \WP_HTML_Tag_Processor( $html );
+
+		if ( $tags->next_tag() && in_array( $tags->get_tag(), array( 'UL', 'OL' ), true ) ) {
+			$tags->set_attribute( 'role', 'list' );
+		}
+
+		return $tags->get_updated_html();
 	}
 
 	/**

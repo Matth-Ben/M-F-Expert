@@ -13,6 +13,7 @@
 
 import { loadFragment } from './fragmentLoader';
 import { startScroll, stopScroll } from '../utils/lenis';
+import { syncCurrentLinks } from '../utils/current-links';
 
 export interface PanelElements {
 	panel: HTMLElement;
@@ -139,6 +140,8 @@ export class PanelManager {
 
 		this.currentPanelKey = key;
 		this.labelFromHeading();
+		// The fragment HTML is cached: mark the current page link each time it is inserted.
+		syncCurrentLinks();
 		this.show();
 	}
 
@@ -202,7 +205,8 @@ export class PanelManager {
 		stopScroll();
 
 		// First focusable element of the fragment, else the close button.
-		const target = panel.querySelector<HTMLElement>(`.panel__content ${FOCUSABLE}`) ?? panel.querySelector<HTMLElement>(FOCUSABLE);
+		const inContent = FOCUSABLE.split(', ').map((selector) => `.panel__content ${selector}`).join(', ');
+		const target = panel.querySelector<HTMLElement>(inContent) ?? panel.querySelector<HTMLElement>(FOCUSABLE);
 		target?.focus();
 	}
 

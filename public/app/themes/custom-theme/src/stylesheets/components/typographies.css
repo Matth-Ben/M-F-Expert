@@ -1,5 +1,67 @@
-@layer components {
-	.h1 {
-		@apply text-h1-mobile lg:text-h1-desktop;
+/*
+ * Échelle typographique (DS v2 §03). Mobile first, bureau à partir de lg.
+ * Declared as @utility so they accept variants (`lg:h2`) and can be @applied.
+ */
+/*
+ * Display (accueil) : « M&F Expert » 66 px sur mobile (16,9vw : tient sur une ligne jusqu'à 320 px),
+ * 92 → 108 px en bureau.
+ */
+@utility display {
+	@apply font-serif text-[min(4.125rem,16.9vw)] leading-none font-normal tracking-[-0.02em] text-bordeaux lg:text-[clamp(3.5rem,9vw,6.75rem)];
+}
+
+/* H1 de page 46 → 80 px. */
+@utility h1 {
+	@apply font-serif text-[2.875rem] leading-[1.02] font-normal tracking-[-0.02em] text-bordeaux lg:text-[5rem];
+}
+
+/* H2 de section, Montserrat 800, 32 → 44 px, interlettrage -4 %. */
+@utility h2 {
+	@apply font-sans text-[2rem] leading-[1.1] font-extrabold tracking-[-0.04em] text-bordeaux lg:text-[2.75rem];
+}
+
+/* H3 (titres de cartes en sans). */
+@utility h3 {
+	@apply font-sans text-2xl leading-tight font-extrabold tracking-[-0.02em] text-bordeaux;
+}
+
+/* Titre script court (1 à 4 mots) ; taille ajustée par le bloc. Jamais resserré (Caveat). */
+@utility script {
+	@apply font-script leading-none font-medium tracking-normal;
+}
+
+/* Titre de carte (tarif, argument inclus, encart, article) : 19 px, 800, bordeaux. */
+@utility card-title {
+	@apply text-card leading-tight font-extrabold tracking-[-0.02em] text-bordeaux;
+}
+
+/* Accroche 36 → 56 px. */
+@utility hook {
+	@apply font-serif text-[2.25rem] leading-[1.08] tracking-[-0.02em] text-bordeaux lg:text-[3.5rem];
+}
+
+/* Citation de bandeau 28 → 42 px. */
+@utility quote {
+	@apply font-serif text-[1.75rem] leading-[1.2] tracking-[-0.01em] lg:text-[2.625rem];
+}
+
+/* Lead 18 → 21 px. */
+@utility lead {
+	@apply text-lg leading-[1.55] font-medium text-ink-soft lg:text-xl;
+}
+
+/* Surtitre : capitales, +14 %, olive foncé, précédé d'un filet or. */
+@utility eyebrow {
+	@apply flex items-center gap-3.5 text-sm font-bold tracking-[0.14em] text-olive-dark uppercase;
+
+	&::before {
+		content: "";
+		@apply h-0.5 w-11 flex-none bg-gold;
 	}
+}
+
+
+/* Filet or sous les titres. */
+@utility rule {
+	@apply h-[3px] w-18 rounded-sm bg-gold;
 }

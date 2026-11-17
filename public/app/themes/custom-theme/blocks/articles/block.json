@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/articles",
+	"version": "1.0.0",
+	"title": "Articles de conseils",
+	"category": "wpg",
+	"icon": "excerpt-view",
+	"description": "Grille des derniers articles (conseils) : vignette, catégorie, titre, extrait et lien. Masqué tant qu’aucun article n’est publié.",
+	"keywords": ["articles", "conseils", "blog", "actualités"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "" },
+		"title": { "type": "string", "default": "Nos conseils" },
+		"count": { "type": "number", "default": 3 },
+		"categoryId": { "type": "number", "default": 0 },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

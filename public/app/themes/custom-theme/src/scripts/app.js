@@ -15,7 +15,9 @@ import { initBarba } from './utils/barba';
 import { initLenis } from './utils/lenis';
 import { initTextAnimations } from './utils/text-animations';
 import { initParallax } from './utils/parallax';
-import { initHeaderScroll } from './utils/header-scroll';
+import { initHeadroom } from './utils/headroom';
+import { initNavIndicator } from './utils/nav-indicator';
+import { initReveal } from './utils/reveal';
 
 initBlocks();
 initFragments();
@@ -24,4 +26,6 @@ initBarba();
 initLenis();
 initTextAnimations();
 initParallax();
-initHeaderScroll();
+initHeadroom();
+initNavIndicator();
+initReveal(document);

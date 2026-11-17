@@ -1,0 +1,61 @@
+/*
+ * Site chrome (parts/site-header.php, parts/site-footer.php, menu panel).
+ */
+@layer components {
+	/* One line per link: the full navigation is only shown from the `nav` breakpoint (1200 px). */
+	.site-nav a {
+		@apply inline-flex min-h-11 items-center whitespace-nowrap underline-offset-[6px] decoration-2 hover:text-bordeaux hover:underline;
+	}
+
+	.site-nav a[aria-current="page"] {
+		@apply text-bordeaux underline;
+	}
+
+	/* Mobile: links wrap with a gap; desktop: one line « © … · Mentions · Confidentialité ». */
+	.footer-legals {
+		@apply gap-x-5 lg:gap-x-0;
+	}
+
+	.footer-legals li::before {
+		@apply lg:px-2 lg:content-['·'];
+	}
+
+	.footer-legals a {
+		@apply inline-flex min-h-11 items-center underline-offset-4 hover:underline;
+	}
+
+	/* Mobile menu panel (parts/fragments/panels/menu.php). */
+	.panel {
+		@apply bg-beige;
+	}
+
+	.panel-menu__title {
+		@apply sr-only;
+	}
+
+	.panel-menu__list {
+		@apply flex flex-col gap-1;
+	}
+
+	.panel-menu__link {
+		@apply flex min-h-12 items-center font-serif text-[2rem] leading-tight text-bordeaux;
+	}
+
+	.panel-menu__link[aria-current="page"] {
+		@apply underline decoration-gold decoration-2 underline-offset-8;
+	}
+}
+
+/*
+ * Underlines, outside @layer: theme.json prints an unlayered `a:where(:not(.wp-element-button)) { text-decoration: none }`
+ * that beats any layered rule, whatever its specificity. Utilities (`hover:underline` in markup) are unlayered and win anyway.
+ * Content links = links without class (typed by the client); styled links of blocks (article cards…) are left alone.
+ */
+.entry-content :where(p, li) a:not([class]),
+.site-nav a:hover,
+.site-nav a[aria-current="page"],
+.footer-legals a:hover,
+.link-arrow:hover,
+.panel-menu__link[aria-current="page"] {
+	text-decoration-line: underline;
+}

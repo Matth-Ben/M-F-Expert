@@ -1,0 +1,42 @@
+/*
+ * Méthode en étapes — automatic numbering (CSS counter, the <ol> carries the semantics)
+ * and dotted connector between two numbers (pseudo-element = invisible to assistive tech).
+ * Mobile: vertical line under the numbers; ≥ lg: horizontal line between the circles.
+ */
+.wpg-steps__list {
+	counter-reset: wpg-step;
+}
+
+.wpg-step {
+	position: relative;
+	counter-increment: wpg-step;
+}
+
+.wpg-step__number::before {
+	content: counter(wpg-step);
+}
+
+.wpg-step__number {
+	box-shadow: 0 0 0 8px var(--wp--preset--color--cream);
+}
+
+.wpg-step:not(:last-of-type)::after {
+	content: "";
+	position: absolute;
+	top: 1.75rem;
+	bottom: -1.75rem;
+	left: calc(1.75rem - 1px);
+	border-left: 2px dashed var(--wp--preset--color--gold);
+	pointer-events: none;
+}
+
+@media (min-width: 64rem) {
+	.wpg-step:not(:last-of-type)::after {
+		top: calc(2.25rem - 1px);
+		bottom: auto;
+		left: 50%;
+		width: calc(100% + 1.5rem);
+		border-top: 2px dashed var(--wp--preset--color--gold);
+		border-left: 0;
+	}
+}

@@ -15,6 +15,7 @@
 	},
 	"supports": {
 		"html": false,
+		"inserter": false,
 		"align": ["full"],
 		"anchor": true,
 		"color": { "background": true, "text": true, "link": false }

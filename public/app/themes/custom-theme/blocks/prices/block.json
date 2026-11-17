@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/prices",
+	"version": "1.0.0",
+	"title": "Tarifs",
+	"category": "wpg",
+	"icon": "money-alt",
+	"description": "Grille de tarifs en cartes (accueil) ou en liste sur deux colonnes, avec une mention et un bouton d’appel.",
+	"keywords": ["tarifs", "prix", "grille", "prestations"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/price"],
+	"attributes": {
+		"layout": { "type": "string", "enum": ["cards", "list"], "default": "cards" },
+		"showHeader": { "type": "boolean", "default": true },
+		"title": { "type": "string", "default": "Nos tarifs" },
+		"intro": { "type": "string", "default": "Pas de produits à acheter, pas de longues heures à y consacrer : voici ce que comprend chaque prestation." },
+		"note": { "type": "string", "default": "[Grille tarifaire à intégrer]" },
+		"buttonText": { "type": "string", "default": "Appelez-nous pour en savoir plus" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"providesContext": {
+		"wpg/pricesLayout": "layout",
+		"wpg/pricesHeader": "showHeader"
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

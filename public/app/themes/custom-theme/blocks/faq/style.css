@@ -1,0 +1,94 @@
+/*
+ * Questions fréquentes (E3) — accordion = core/details (markup produced by WordPress, so styled here).
+ * Loaded only where the block is used (front + editor). Unlayered on purpose: beats WordPress' core CSS.
+ * Cream card (radius 22), question in bordeaux, round « + » turning into a cross when open,
+ * answer in ink-soft. No overflow:hidden on the card, so the summary focus ring is never clipped.
+ */
+.wpg-faq .wp-block-details {
+	margin: 0;
+	border-radius: 1.375rem; /* rounded-box */
+	background-color: var(--wp--preset--color--cream);
+}
+
+.wpg-faq .wp-block-details > summary {
+	display: flex;
+	min-height: 4rem;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	border-radius: 1.375rem;
+	padding: 1.125rem 1.25rem;
+	color: var(--wp--preset--color--bordeaux);
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.7;
+	list-style: none;
+	cursor: pointer;
+}
+
+.wpg-faq .wp-block-details > summary::-webkit-details-marker {
+	display: none;
+}
+
+/* Round bordeaux « + » (decorative: the open/closed state is exposed by <details> itself). */
+.wpg-faq .wp-block-details > summary::after {
+	content: "";
+	flex: none;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: var(--wp--preset--color--bordeaux)
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F7F1EA' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M12 5v14M5 12h14'/%3E%3C/svg%3E")
+		center / 1.125rem no-repeat;
+	transition: transform 0.2s ease;
+}
+
+.wpg-faq .wp-block-details[open] > summary::after {
+	transform: rotate(45deg);
+}
+
+/* Focus ring inside the card (base/base.css draws it in gold). */
+.wpg-faq .wp-block-details > summary:focus-visible {
+	outline-offset: -3px;
+}
+
+/* Answer (paragraphs, lists…). */
+.wpg-faq .wp-block-details > :not(summary) {
+	margin: 0;
+	padding-inline: 1.25rem;
+	color: var(--wp--preset--color--ink-soft);
+	font-size: var(--text-note, 0.96875rem); /* 15.5 px */
+}
+
+.wpg-faq .wp-block-details > :is(ul, ol) {
+	padding-inline-start: 2.75rem; /* room for the bullets */
+}
+
+.wpg-faq .wp-block-details > :not(summary) + :not(summary) {
+	margin-top: 0.75rem;
+}
+
+.wpg-faq .wp-block-details > :last-child:not(summary) {
+	padding-bottom: 1.375rem;
+}
+
+@media (min-width: 64rem) {
+	.wpg-faq .wp-block-details > summary {
+		padding-inline: 1.75rem;
+		font-size: 1.0625rem;
+	}
+
+	.wpg-faq .wp-block-details > :not(summary) {
+		padding-inline: 1.75rem;
+	}
+
+	.wpg-faq .wp-block-details > :is(ul, ol) {
+		padding-inline-start: 3.25rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wpg-faq .wp-block-details > summary::after {
+		transition: none;
+	}
+}

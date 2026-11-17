@@ -1,0 +1,44 @@
+/*
+ * Réassurance (B3) — light section: no top padding (right under the hero it closes it, C2/Prestations).
+ * Top padding after a coloured band: components/content.css (rule shared by the light sections).
+ */
+
+/* Under the home hero, desktop: a bit more air before the next section (C2: 90 px). */
+@media (min-width: 64rem) {
+	.wpg-hero--home + .wpg-reassurance {
+		padding-bottom: 5.625rem;
+	}
+}
+
+/*
+ * Under the home hero, mobile (C2 mobile): a light list that closes the hero, 20 px under the emblem —
+ * no box, no disc: 14.5 px semi-bold olive-dark text, 18 px dark-gold check. The cream band is back from lg.
+ */
+@media (max-width: 63.999rem) {
+	.wpg-hero--home:has(+ .wpg-reassurance) {
+		padding-bottom: 1.25rem;
+	}
+
+	.wpg-hero--home + .wpg-reassurance .check-list--band {
+		gap: 0.5rem;
+		border-radius: 0;
+		background: none;
+		padding: 0;
+		color: var(--wp--preset--color--olive-dark);
+		font-size: 0.90625rem;
+		font-weight: 600;
+		line-height: 1.7;
+	}
+
+	.wpg-hero--home + .wpg-reassurance .check-list--band > li {
+		gap: 0.5rem;
+	}
+
+	.wpg-hero--home + .wpg-reassurance .check-list--band > li::before {
+		width: 1.125rem;
+		height: 1.125rem;
+		border-radius: 0;
+		background: var(--wp--preset--color--gold-dark);
+		mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center / contain no-repeat;
+	}
+}

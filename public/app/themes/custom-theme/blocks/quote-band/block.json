@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/quote-band",
+	"version": "1.0.0",
+	"title": "Citation en bandeau",
+	"category": "wpg",
+	"icon": "format-quote",
+	"description": "Bandeau bordeaux pleine largeur : surtitre, phrase forte en citation et signature manuscrite.",
+	"keywords": ["citation", "bandeau", "phrase", "slogan"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"eyebrow": { "type": "string", "default": "Le protocole" },
+		"quote": {
+			"type": "string",
+			"default": "Chaque famille reçoit des explications détaillées et un protocole à suivre à la maison après le traitement."
+		},
+		"signature": { "type": "string", "default": "Une expertise douce et efficace pour toute la famille." },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

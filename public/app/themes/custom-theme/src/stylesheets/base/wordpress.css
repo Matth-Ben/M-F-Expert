@@ -6,10 +6,15 @@
 
 	.screen-reader-text:focus,
 	.screen-reader-shortcut:focus {
-		@apply not-sr-only fixed top-2 left-2 z-[100000] bg-white px-6 py-4 text-black;
+		@apply not-sr-only fixed top-2 left-2 z-[100000] bg-cream px-6 py-4 text-bordeaux;
 	}
 
 	.screen-reader-shortcut {
 		@apply sr-only;
 	}
+}
+
+/* The skip link appears over the bordeaux announcement bar: focus ring inside its cream box (base.css). */
+.screen-reader-shortcut:focus-visible {
+	outline-offset: -6px;
 }

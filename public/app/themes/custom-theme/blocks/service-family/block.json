@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/service-family",
+	"version": "1.0.0",
+	"title": "Carte « Toute la famille »",
+	"category": "wpg",
+	"icon": "groups",
+	"description": "Carte claire avec icône, titre manuscrit, texte et badge « NOUVEAU sur VIRIAT » (dans un bloc Prestations). Pleine largeur en mise en page détaillée.",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/services"],
+	"usesContext": ["wpg/servicesLayout", "wpg/servicesHeader"],
+	"attributes": {
+		"icon": { "type": "string", "enum": ["arrow", "calendar", "car", "chat", "check", "clock", "heart", "home", "mail", "phone", "pin", "plus", "quote", "search", "shield", "star", "users"], "default": "users" },
+		"title": { "type": "string", "default": "" },
+		"text": { "type": "string", "default": "" },
+		"showBadge": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

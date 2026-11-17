@@ -1,0 +1,151 @@
+/*
+ * Shared block components (DS v2 §05). Used by several blocks in render.php AND edit.js:
+ * keep the class names stable.
+ *
+ * .check-list   reassurance list with round olive check (works on core/list output too)
+ * .photo-frame  photo with the offset gold frame (+ --text: lower photo of the Texte + image block)
+ * .badge-new    « NOUVEAU sur VIRIAT » star badge (markup: parts/components/badge.php, blocks/_shared/badge.js)
+ * .icon-dot     round icon holder
+ */
+@layer components {
+	.check-list {
+		@apply m-0 flex list-none flex-col gap-3 p-0 text-note leading-[1.35] font-bold text-bordeaux;
+	}
+
+	.check-list > li {
+		@apply flex items-center gap-3;
+	}
+
+	.check-list > li::before {
+		content: "";
+		@apply size-9 flex-none rounded-full bg-olive-dark;
+		/* Cream check drawn over the olive disc. */
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F7F1EA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 1.125rem;
+	}
+
+	/* Horizontal band (B3): cream box, 3 columns on desktop. */
+	.check-list--band {
+		@apply grid gap-3 rounded-box bg-cream px-5 py-4.5 lg:grid-cols-3 lg:gap-5 lg:px-7;
+	}
+
+	.check-list--band > li {
+		@apply lg:justify-center;
+	}
+
+	/* Cards (C2 arguments on bordeaux): one cream box per item, more compact on mobile. */
+	.check-list--cards {
+		@apply grid gap-3 text-base sm:grid-cols-2 lg:gap-4 lg:text-body;
+	}
+
+	.check-list--cards > li {
+		@apply gap-3.5 rounded-box bg-cream p-4.5 lg:p-5.5;
+	}
+
+	.check-list--cards > li::before {
+		@apply size-10;
+	}
+
+	/* Small key points on a bordeaux card (D2): body text (15,5 px, regular, 1.7), gold-light check, no disc. */
+	.check-list--on-dark {
+		@apply gap-2.5 text-note leading-[1.7] font-normal text-cream;
+	}
+
+	.check-list--on-dark > li {
+		@apply items-start gap-2.5;
+	}
+
+	.check-list--on-dark > li::before {
+		@apply mt-1 size-4.5 rounded-none bg-transparent;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E8C28F' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+		background-size: 1.125rem;
+	}
+
+	.photo-frame {
+		@apply relative;
+	}
+
+	.photo-frame::before {
+		content: "";
+		@apply pointer-events-none absolute top-3.5 right-3 -bottom-3.5 -left-3 rounded-panel border-2 border-gold;
+	}
+
+	.photo-frame > img,
+	.photo-frame > .photo-frame__placeholder {
+		@apply relative block h-[17.5rem] w-full rounded-panel object-cover lg:h-[27.5rem];
+	}
+
+	.photo-frame__placeholder {
+		@apply grid place-items-center bg-rose/40 text-bordeaux;
+	}
+
+	/* Texte + image (C1): lower photo, 250 → 430 px (the family photo stays 280 → 440 px). */
+	.photo-frame--text > img,
+	.photo-frame--text > .photo-frame__placeholder {
+		@apply h-[15.625rem] lg:h-[26.875rem];
+	}
+
+	/*
+	 * Badge: the text is sized in container units, so it follows the badge size set by each block
+	 * (120 → 150 px, 118 → 132 px in the family card): NOUVEAU 11 → 13 px, « sur » 10 → 12 px, VIRIAT 15 → 19 px.
+	 */
+	.badge-new {
+		@apply pointer-events-none relative size-[7.5rem] flex-none select-none lg:size-[9.375rem];
+		container-type: inline-size;
+	}
+
+	.badge-new__star {
+		@apply absolute inset-[9%] bg-rose;
+	}
+
+	.badge-new__star:nth-child(2) {
+		rotate: 30deg;
+	}
+
+	.badge-new__star:nth-child(3) {
+		rotate: 60deg;
+	}
+
+	.badge-new__disc {
+		@apply absolute inset-[18%] rounded-full bg-bordeaux;
+	}
+
+	.badge-new__text {
+		@apply absolute inset-0 flex -rotate-[8deg] flex-col items-center justify-center text-center leading-[1.1] text-cream;
+	}
+
+	.badge-new__new {
+		@apply font-bold tracking-[0.04em];
+		font-size: calc(0.25rem + 6cqw);
+	}
+
+	.badge-new__on {
+		font-size: calc(0.1875rem + 6cqw);
+	}
+
+	.badge-new__place {
+		@apply font-extrabold;
+		font-size: 12.7cqw;
+	}
+
+	/* Browsers without container units: sizes of the 132 px badge. */
+	@supports not (font-size: 1cqw) {
+		.badge-new__new {
+			font-size: 0.75rem;
+		}
+
+		.badge-new__on {
+			font-size: 0.6875rem;
+		}
+
+		.badge-new__place {
+			font-size: 1.0625rem;
+		}
+	}
+
+	.icon-dot {
+		@apply grid flex-none place-items-center rounded-full;
+	}
+}

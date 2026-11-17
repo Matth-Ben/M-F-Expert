@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/services",
+	"version": "1.0.0",
+	"title": "Prestations",
+	"category": "wpg",
+	"icon": "grid-view",
+	"description": "En-tête (surtitre, titre, lien) et cartes de prestations : grille de trois cartes (accueil) ou cartes détaillées avec la carte famille en pleine largeur.",
+	"keywords": ["prestations", "services", "offre", "cartes"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/service", "wpg/service-family"],
+	"attributes": {
+		"layout": { "type": "string", "enum": ["grid", "detailed"], "default": "grid" },
+		"showHeader": { "type": "boolean", "default": true },
+		"eyebrow": { "type": "string", "default": "Ce que nous proposons" },
+		"title": { "type": "string", "default": "Nos prestations" },
+		"linkText": { "type": "string", "default": "Toutes nos prestations" },
+		"linkUrl": { "type": "string", "default": "" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"providesContext": {
+		"wpg/servicesLayout": "layout",
+		"wpg/servicesHeader": "showHeader"
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

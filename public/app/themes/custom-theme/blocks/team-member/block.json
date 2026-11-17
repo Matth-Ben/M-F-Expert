@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/team-member",
+	"version": "1.0.0",
+	"title": "Membre de l’équipe",
+	"category": "wpg",
+	"icon": "admin-users",
+	"description": "Portrait rond, nom, rôle et courte présentation (dans un bloc Équipe).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/team"],
+	"attributes": {
+		"mediaId": { "type": "number" },
+		"name": { "type": "string", "default": "" },
+		"role": { "type": "string", "default": "" },
+		"bio": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

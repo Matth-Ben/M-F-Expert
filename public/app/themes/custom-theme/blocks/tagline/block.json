@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/tagline",
+	"version": "1.0.0",
+	"title": "Accroche",
+	"category": "wpg",
+	"icon": "format-quote",
+	"description": "Phrase d'accroche centrée sur trois lignes : grande phrase, texte en gras, signature manuscrite.",
+	"keywords": ["accroche", "slogan", "phrase", "signature"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"hook": {
+			"type": "string",
+			"default": "Les poux vous prennent la tête,"
+		},
+		"text": {
+			"type": "string",
+			"default": "pas de produits à acheter ni de longues heures à leur consacrer&nbsp;!"
+		},
+		"signature": {
+			"type": "string",
+			"default": "Venez nous rencontrer&nbsp;!"
+		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

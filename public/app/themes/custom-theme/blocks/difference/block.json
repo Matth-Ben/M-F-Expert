@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/difference",
+	"version": "1.0.0",
+	"title": "Notre différence",
+	"category": "wpg",
+	"icon": "awards",
+	"description": "Bandeau bordeaux : titre, encart encadré avec mot clé doré, bouton facultatif et quatre arguments en cartes.",
+	"keywords": ["différence", "arguments", "protocole", "bandeau"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Notre différence"
+		},
+		"text": {
+			"type": "string",
+			"default": "<strong>Le protocole :</strong> chaque famille reçoit des explications détaillées et un protocole à suivre à la maison après le traitement."
+		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

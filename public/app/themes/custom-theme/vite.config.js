@@ -58,6 +58,11 @@ export default defineConfig(({ mode }) => {
 			viteSvgSpriteWrapper({
 				icons: "src/icons/*.svg",
 				outputDir: "public",
+				// Line icons (DS v2 §06): keep their own fill="none" / stroke="currentColor"
+				// (the plugin's default strips fills and forces fill="currentColor").
+				sprite: {
+					shape: { transform: [{ svgo: { plugins: [{ name: "preset-default" }, "removeXMLNS"] } }] },
+				},
 			}),
 			viteCompression(),
 		],

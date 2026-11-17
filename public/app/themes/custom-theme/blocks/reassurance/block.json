@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/reassurance",
+	"version": "1.0.0",
+	"title": "Réassurance",
+	"category": "wpg",
+	"icon": "yes-alt",
+	"description": "Bandeau crème de trois arguments courts avec coche. Placé juste sous le hero, il se colle à lui.",
+	"keywords": ["arguments", "coches", "bandeau", "avantages"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

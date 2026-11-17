@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/service",
+	"version": "1.0.0",
+	"title": "Carte de prestation",
+	"category": "wpg",
+	"icon": "id-alt",
+	"description": "Carte bordeaux : icône, titre manuscrit, texte, points clés et lien (dans un bloc Prestations).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/services"],
+	"usesContext": ["wpg/servicesLayout", "wpg/servicesHeader"],
+	"allowedBlocks": ["core/paragraph", "core/list", "core/buttons"],
+	"attributes": {
+		"icon": { "type": "string", "enum": ["arrow", "calendar", "car", "chat", "check", "clock", "heart", "home", "mail", "phone", "pin", "plus", "quote", "search", "shield", "star", "users"], "default": "search" },
+		"title": { "type": "string", "default": "" },
+		"linkText": { "type": "string", "default": "" },
+		"linkUrl": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

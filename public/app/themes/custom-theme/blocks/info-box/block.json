@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/info-box",
+	"version": "1.0.0",
+	"title": "Encart d’information",
+	"category": "wpg",
+	"icon": "info-outline",
+	"description": "Encart crème d’information pratique : icône, titre et texte (ex. « Réserver et régler »).",
+	"keywords": ["encart", "information", "réservation", "paiement"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["core/paragraph", "core/list"],
+	"attributes": {
+		"icon": { "type": "string", "enum": ["arrow", "calendar", "car", "chat", "check", "clock", "heart", "home", "mail", "phone", "pin", "plus", "quote", "search", "shield", "star", "users"], "default": "calendar" },
+		"title": { "type": "string", "default": "Réserver et régler" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

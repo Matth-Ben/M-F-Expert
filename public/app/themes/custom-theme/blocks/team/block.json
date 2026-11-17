@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/team",
+	"version": "1.0.0",
+	"title": "Équipe",
+	"category": "wpg",
+	"icon": "groups",
+	"description": "Titre et cartes de présentation des membres de l’équipe (portrait, nom, rôle, présentation).",
+	"keywords": ["équipe", "membres", "portrait", "personnes"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/team-member"],
+	"attributes": {
+		"title": { "type": "string", "default": "Votre équipe" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

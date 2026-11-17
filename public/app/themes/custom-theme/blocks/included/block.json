@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/included",
+	"version": "1.0.0",
+	"title": "Inclus dans chaque prestation",
+	"category": "wpg",
+	"icon": "yes-alt",
+	"description": "Bandeau bordeaux : titre et cartes de réassurance (icône, titre, texte).",
+	"keywords": ["inclus", "réassurance", "avantages", "arguments"],
+	"textdomain": "wp-gutenberg",
+	"allowedBlocks": ["wpg/feature"],
+	"attributes": {
+		"title": { "type": "string", "default": "Inclus dans chaque prestation" },
+		"align": { "type": "string", "default": "full" }
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/family",
+	"version": "1.0.0",
+	"title": "Toute la famille",
+	"category": "wpg",
+	"icon": "groups",
+	"description": "Bandeau crème : photo encadrée avec badge « NOUVEAU sur VIRIAT », surtitre, titre manuscrit, texte et liste à coches.",
+	"keywords": [
+		"famille",
+		"photo",
+		"badge",
+		"coches"
+	],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"mediaId": {
+			"type": "number"
+		},
+		"showBadge": {
+			"type": "boolean",
+			"default": true
+		},
+		"eyebrow": {
+			"type": "string",
+			"default": "Enfants et parents"
+		},
+		"title": {
+			"type": "string",
+			"default": "Toute la famille"
+		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"full"
+		],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

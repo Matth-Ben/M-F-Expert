@@ -1,7 +1,57 @@
 @layer base {
-	/* Change cursor to pointer for all buttons and elements with role="button" */
+	body {
+		@apply bg-beige font-sans text-base leading-[1.7] text-ink lg:text-body;
+	}
+
+	/*
+	 * Fixed bottom elements (mobile call/chat bar 76 px, desktop chat button 86 px from the bottom):
+	 * when focus scrolls an element into view, keep it above them (WCAG 2.4.11).
+	 */
+	html {
+		scroll-padding-bottom: 6rem;
+	}
+
 	button:not(:disabled),
 	[role="button"]:not(:disabled) {
 		cursor: pointer;
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			scroll-behavior: auto !important;
+		}
+	}
+}
+
+/*
+ * Focus visible: 3 px gold outline (DS v2 §04), at least 3:1 against the surface it is drawn on (WCAG 1.4.11).
+ * The DS gold (#C38B47) is below 3:1 on every surface, so the ring uses the two gold variants:
+ * - dark gold on light surfaces (beige 4.6:1, cream 5.3:1, white 5.9:1),
+ * - light gold on dark surfaces (bordeaux 5:1).
+ * `--focus-ring` is set by the containers (never by focusable elements: their own background
+ * is not what the outline, drawn 2 px outside, sits on) and inherited.
+ * Outside @layer so WordPress' unlayered CSS cannot hide it; utilities (`focus-visible:…`) still win.
+ */
+:root {
+	--focus-ring: var(--color-gold-dark);
+}
+
+:is(.bg-bordeaux, .has-bordeaux-background-color, .has-ink-background-color, .has-ink-soft-background-color, .has-accent-background-color, .has-olive-dark-background-color):not(a, button, input, select, textarea, summary, [tabindex]) {
+	--focus-ring: var(--color-gold-light);
+}
+
+:is(.bg-beige, .bg-cream, .bg-white, .has-beige-background-color, .has-cream-background-color, .has-white-background-color, .has-gold-light-background-color, .has-gold-pale-background-color):not(a, button, input, select, textarea, summary, [tabindex]) {
+	--focus-ring: var(--color-gold-dark);
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
+/* Programmatic focus targets (skip link → <main>, page heading after a Barba navigation): not controls, no ring. */
+:is(main, h1)[tabindex="-1"]:focus {
+	outline: none;
 }

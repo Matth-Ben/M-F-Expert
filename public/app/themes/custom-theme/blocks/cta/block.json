@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/cta",
+	"version": "1.0.0",
+	"title": "Appel à l'action",
+	"category": "wpg",
+	"icon": "megaphone",
+	"description": "Panneau crème d'invitation : titre manuscrit, phrase d'accroche et boutons (appeler, poser une question).",
+	"keywords": ["contact", "appel", "boutons", "rencontrer"],
+	"textdomain": "wp-gutenberg",
+	"attributes": {
+		"title": {
+			"type": "string",
+			"default": "Venez nous rencontrer&nbsp;!"
+		},
+		"text": {
+			"type": "string",
+			"default": "Les poux vous prennent la tête, pas de produits à acheter ni de longues heures à leur consacrer&nbsp;!"
+		},
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": ["full"],
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

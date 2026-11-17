@@ -1,0 +1,53 @@
+/*
+ * Notre différence — mobile: one column (title, box, button, cards).
+ * Desktop: left column = title, box, button (vertically centred), right column = the cards list.
+ * The inner blocks wrapper is `display: contents`, so .wp-block-buttons and the list are grid items.
+ */
+.wpg-difference__grid {
+	display: grid;
+	gap: 1rem;
+}
+
+.wpg-difference__grid .check-list {
+	margin-top: 0.75rem;
+}
+
+@media (min-width: 64rem) {
+	/*
+	 * The two empty `1fr` rows centre the left column against the list. No row gap (it would be added
+	 * around those empty rows too, making the band taller than the mock-up): the 20 px between title,
+	 * box and button are margins.
+	 */
+	.wpg-difference__grid {
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+		grid-template-rows: 1fr auto auto auto 1fr;
+		column-gap: 4.5rem;
+		row-gap: 0;
+	}
+
+	.wpg-difference__grid > *,
+	.wpg-difference__grid > .contents > * {
+		grid-column: 1;
+	}
+
+	.wpg-difference__title {
+		grid-row: 2;
+	}
+
+	.wpg-difference__box {
+		grid-row: 3;
+		margin-top: 1.25rem;
+	}
+
+	.wpg-difference__grid .wp-block-buttons {
+		grid-row: 4;
+		margin-top: 1.25rem;
+	}
+
+	.wpg-difference__grid .check-list {
+		grid-column: 2;
+		grid-row: 1 / -1;
+		align-self: center;
+		margin-top: 0;
+	}
+}

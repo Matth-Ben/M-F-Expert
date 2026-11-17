@@ -1,27 +1,33 @@
-/*
- * Rich content typography (replaces .wysiwyg).
- *
- * Scoped to the block content wrapper on the front (.entry-content)
- * AND to the editor canvas root (.is-root-container) → same rendering in both.
- * Tailwind preflight strips list styles/heading sizes, so they're restored here.
- */
-/*
- * Full-width sections (hero, section, stats…) stack edge to edge: cancel WordPress' blockGap
- * between them. Unlayered on purpose, to beat the (unlayered) global-styles rule.
- */
 .entry-content > .alignfull,
 .is-root-container > .alignfull {
 	margin-block: 0;
 }
 
+/*
+ * Light sections (no background) only have a bottom padding (`pb-section-lg`…): under the hero or another
+ * light section, that is all the space needed. Right after a coloured band (bordeaux or cream block, block
+ * with a background colour), they get the same space on top. One rule for every light block (front + editor);
+ * a light block with a background colour is a band itself (its own padding, e.g. blocks/text-media/style.css).
+ * Outside @layer, like WordPress' block CSS.
+ */
+:is(.bg-bordeaux, .bg-cream, .has-background) + :is(.wpg-reassurance, .wpg-tagline, .wpg-services, .wpg-text-media, .wpg-prices, .wpg-team, .wpg-cta, .wpg-info-box, .wpg-articles, .wpg-faq, .wpg-contact):not(.has-background) {
+	padding-top: var(--wp--preset--spacing--lg);
+}
+
+/*
+ * Free content (paragraphs, headings, lists typed by the client inside sections and legal pages).
+ * Tailwind preflight strips list styles/heading sizes, so they're restored here.
+ * Headings: core/heading only (`.wp-block-heading`), so block titles (script, card titles…) keep their own style.
+ * Links: only links without class (typed in a paragraph or a list); styled links of blocks (cards, buttons) are left alone.
+ */
 @layer components {
 	:where(.entry-content, .is-root-container) {
-		:where(h2) {
-			@apply text-h2-mobile lg:text-h2-desktop;
+		:where(h2.wp-block-heading) {
+			@apply h2;
 		}
 
-		:where(h3) {
-			@apply text-xl;
+		:where(h3.wp-block-heading) {
+			@apply h3;
 		}
 
 		:where(ul) {
@@ -32,12 +38,12 @@
 			@apply list-decimal pl-6;
 		}
 
-		:where(p, li) a {
-			@apply underline underline-offset-2;
+		:where(p, li) a:not([class]) {
+			@apply underline underline-offset-4;
 		}
 
 		:where(blockquote) {
-			@apply border-l-2 border-current pl-6 italic;
+			@apply border-l-2 border-gold pl-6 italic;
 		}
 
 		:where(p:empty) {

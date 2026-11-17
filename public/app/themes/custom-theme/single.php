@@ -12,7 +12,7 @@ while ( have_posts() ) :
 	?>
 	<article <?php post_class( 'pt-32' ); ?>>
 		<header class="container mb-12">
-			<p class="text-sm opacity-60"><?php echo esc_html( get_the_date() ); ?></p>
+			<p class="text-sm text-ink-soft"><?php echo esc_html( get_the_date() ); ?></p>
 			<h1 class="h1"><?php the_title(); ?></h1>
 		</header>
 

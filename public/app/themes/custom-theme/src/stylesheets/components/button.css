@@ -1,3 +1,170 @@
+/*
+ * Boutons (DS v2 §04) : rayon 18 px, 44 px mini (54 px pleine largeur sur mobile),
+ * survol luminosité +10 %, focus or 3 px (base/base.css).
+ * Interlignage 1,7 comme le texte courant de la maquette : 59 px (16 px de padding), 52 px en `btn--sm`.
+ *
+ * Two entry points share the same look:
+ * - `.btn .btn--primary|outline|light|chat` in templates and render.php;
+ * - core/button (`.wp-block-button`) with block styles "fill" (default), "outline", "light"
+ *   (src/editor/index.js). Written outside @layer to beat WordPress' unlayered CSS.
+ */
 @layer components {
-	.button {}
+	.btn {
+		@apply inline-flex min-h-11 items-center justify-center gap-2.5 rounded-btn px-8 py-4 text-center text-base leading-[1.7] font-bold transition-[filter] duration-200 hover:brightness-110;
+	}
+
+	.btn svg {
+		@apply size-[18px] flex-none;
+	}
+
+	.btn--primary {
+		@apply bg-bordeaux text-cream;
+	}
+
+	.btn--outline {
+		@apply border-2 border-bordeaux px-[1.875rem] py-3.5 text-bordeaux;
+	}
+
+	.btn--light {
+		@apply bg-cream font-extrabold text-bordeaux;
+	}
+
+	.btn--chat {
+		@apply rounded-box border-2 border-cream bg-olive-dark py-3.5 pr-5.5 pl-4 text-md text-white shadow-float;
+	}
+
+	/* Header button: 52 px. */
+	.btn--sm {
+		@apply px-6 py-3.25 text-md;
+	}
+
+	/* Mobile : pleine largeur, 54 px. */
+	.btn--block-mobile {
+		@apply max-lg:min-h-[3.375rem] max-lg:w-full;
+	}
+
+	/* Lien flèche (cartes d'articles / cartes sombres). */
+	.link-arrow {
+		@apply inline-flex min-h-11 items-center gap-2 font-bold text-bordeaux underline-offset-4 hover:underline;
+	}
+
+	.link-arrow svg {
+		@apply size-[18px] flex-none transition-transform duration-200;
+	}
+
+	.link-arrow:hover svg {
+		@apply translate-x-1;
+	}
+
+	.link-arrow--light {
+		@apply text-gold-light;
+	}
+}
+
+/* core/buttons → same look as .btn (outside @layer, see header). */
+.wp-block-buttons {
+	gap: 1rem;
+}
+
+.wp-block-button .wp-block-button__link {
+	display: inline-flex;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	gap: 0.625rem;
+	border: 0;
+	border-radius: var(--radius-btn);
+	background-color: var(--color-bordeaux);
+	color: var(--color-cream);
+	padding: 1rem 2rem;
+	font-size: var(--text-base);
+	font-weight: 700;
+	line-height: 1.7;
+	text-decoration: none;
+	transition: filter 0.2s;
+}
+
+.wp-block-button .wp-block-button__link:hover {
+	filter: brightness(1.1);
+}
+
+.wp-block-button.is-style-outline .wp-block-button__link {
+	border: 2px solid var(--color-bordeaux);
+	background-color: transparent;
+	color: var(--color-bordeaux);
+	padding: 0.875rem 1.875rem;
+}
+
+.wp-block-button.is-style-light .wp-block-button__link {
+	background-color: var(--color-cream);
+	color: var(--color-bordeaux);
+	font-weight: 800;
+}
+
+@media (max-width: 63.999rem) {
+	.wp-block-buttons {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.wp-block-buttons .wp-block-button,
+	.wp-block-buttons .wp-block-button__link {
+		width: 100%;
+		min-height: 3.375rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn,
+	.link-arrow svg,
+	.wp-block-button .wp-block-button__link {
+		transition: none;
+	}
+}
+
+/*
+ * The floating chat button can sit over any surface (beige, cream, bordeaux band, photo, footer):
+ * its focus ring is drawn inside, on its own olive background (light gold 4.2:1, WCAG 1.4.11).
+ */
+.btn--chat:focus-visible {
+	outline-color: var(--color-gold-light);
+	outline-offset: -6px;
+}
+
+/*
+ * core/button has no icon option. Pictograms are added from the link target, like the mockups:
+ * - phone: tel: links, the `#appeler` token (resolved by includes/Core/ContactLinks.php → data-icon="phone");
+ * - chat: the `#chat` token (data-icon="chat").
+ * The `#…` selectors cover the editor, where tokens are not resolved. Mask = currentColor.
+ */
+.wp-block-button__link:is([href^="tel:"], [href="#appeler"], [data-icon="phone"], [href="#chat"], [data-icon="chat"])::before {
+	content: "";
+	flex: none;
+	width: 1.125rem;
+	height: 1.125rem;
+	background-color: currentColor;
+	mask: var(--btn-icon) center / contain no-repeat;
+}
+
+.wp-block-button__link:is([href^="tel:"], [href="#appeler"], [data-icon="phone"]) {
+	--btn-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z'/%3E%3C/svg%3E");
+}
+
+.wp-block-button__link:is([href="#chat"], [data-icon="chat"]) {
+	--btn-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 20A9 9 0 1 0 4 16.1L2 22z'/%3E%3C/svg%3E");
+}
+
+/*
+ * Arrow after the label (« Découvrir notre approche → »): class `has-arrow` on the Button block
+ * (Advanced > Additional CSS class(es); WordPress puts it on the .wp-block-button wrapper).
+ * Decorative (empty content, nothing announced), same mask technique as the icons above.
+ */
+.wp-block-button.has-arrow .wp-block-button__link::after {
+	content: "";
+	flex: none;
+	width: 1.125rem;
+	height: 1.125rem;
+	background-color: currentColor;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / contain no-repeat;
 }

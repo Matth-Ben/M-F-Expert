@@ -30,7 +30,10 @@
 @import "./components/typographies.css";
 @import "./components/content.css";
 @import "./components/panel.css";
+@import "./components/site.css";
+@import "./components/shared.css";
 @import "./components/grid-debugger.css";
 @import "./components/barba.css";
 @import "./components/lenis.css";
 @import "./components/text-animations.css";
+@import "./components/motion.css";

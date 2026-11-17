@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/feature",
+	"version": "1.0.0",
+	"title": "Argument inclus",
+	"category": "wpg",
+	"icon": "yes",
+	"description": "Carte crème : icône, titre et texte (dans un bloc Inclus dans chaque prestation).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/included"],
+	"attributes": {
+		"icon": { "type": "string", "enum": ["arrow", "calendar", "car", "chat", "check", "clock", "heart", "home", "mail", "phone", "pin", "plus", "quote", "search", "shield", "star", "users"], "default": "check" },
+		"title": { "type": "string", "default": "" },
+		"text": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

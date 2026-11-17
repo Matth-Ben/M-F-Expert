@@ -28,8 +28,8 @@
 	width: 100%;
 	max-width: 400px;
 	height: 100%;
-	background-color: var(--color-white);
-	color: var(--color-black);
+	background-color: var(--color-cream);
+	color: var(--color-ink);
 	box-shadow: -2px 0 10px rgb(0 0 0 / 0.1);
 	transform: translateX(100%);
 	visibility: hidden;
@@ -63,11 +63,10 @@
 	cursor: pointer;
 }
 
-.panel__close:focus-visible,
-.panel :focus-visible {
-	outline: 2px solid currentColor;
-	outline-offset: 2px;
-}
+/*
+ * Focus ring: the global one (base/base.css, dark gold on the cream panel). No `currentColor` override:
+ * it made the ring of the bordeaux « Appelez-nous » button cream on cream, i.e. invisible.
+ */
 
 .panel__content {
 	flex: 1;

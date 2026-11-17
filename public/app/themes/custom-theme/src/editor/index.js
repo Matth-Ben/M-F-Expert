@@ -13,7 +13,6 @@ keepHeroFirst();
 
 domReady(() => {
 	// Core styles that don't exist in the design system.
-	unregisterBlockStyle('core/button', 'outline');
 	unregisterBlockStyle('core/image', 'rounded');
 	unregisterBlockStyle('core/separator', ['wide', 'dots']);
 	unregisterBlockStyle('core/quote', 'plain');
@@ -24,5 +23,6 @@ domReady(() => {
 	);
 
 	// Project styles: the class `is-style-<name>` is added on the block, style it in Tailwind/CSS.
-	registerBlockStyle('core/button', { name: 'arrow', label: __('Arrow', 'wp-gutenberg') });
+	// Button looks of DS v2 §04 (styles in src/stylesheets/components/button.css): fill (default), outline, light.
+	registerBlockStyle('core/button', { name: 'light', label: __('Light (on bordeaux)', 'wp-gutenberg') });
 });

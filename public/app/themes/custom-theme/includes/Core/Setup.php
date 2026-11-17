@@ -56,7 +56,6 @@ final class Setup {
 
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'custom-logo', array( 'flex-width' => true, 'flex-height' => true ) );
 		add_theme_support( 'responsive-embeds' );
 		add_theme_support( 'html5', array( 'search-form', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' ) );
 

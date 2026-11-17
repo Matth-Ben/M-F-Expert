@@ -1,16 +1,26 @@
 /**
  * Barba + per-block assets.
  *
- * WordPress only prints a block's CSS/JS on pages that contain the block.
- * Barba swaps the page content without reloading <head>, so when navigating to a page
- * using a block that wasn't on the first page, its assets would be missing.
- * This copies the stylesheets / inline styles / script modules of the next page
- * that are not in the current document yet.
+ * WordPress only prints a block's CSS/JS on pages that contain the block, and some inline styles
+ * depend on the page (global styles of the blocks present, layout `wp-container-*` rules…).
+ * Barba swaps the page content without reloading <head>, so this copies what the next page needs:
+ * - stylesheets and inline styles that are not in the document yet;
+ * - for an inline style that exists with other content: the next page's rules are ADDED next to it
+ *   (never replaced: the rules of the pages already seen stay valid and are harmless);
+ * - block view modules (viewScriptModule).
  *
- * @param {string} html Full HTML of the next page (Barba `data.next.html`).
- * @returns {Promise<void>} Resolves when new stylesheets are loaded (avoids a flash).
+ * Must be called once the next page has been fetched (Barba `beforeEnter`: `data.next.html`).
+ *
+ * @param {string|undefined} html Full HTML of the next page.
+ * @returns {Promise<void>} Resolves when new stylesheets are loaded (avoids a flash of unstyled content).
  */
+const appended = new Map(); // style id => Set of CSS texts already added for that id
+
 export function syncAssets(html) {
+	if (!html) {
+		return Promise.resolve();
+	}
+
 	const next = new DOMParser().parseFromString(html, 'text/html');
 	const pending = [];
 
@@ -31,22 +41,30 @@ export function syncAssets(html) {
 		document.head.append(clone);
 	});
 
-	// Inline block styles (small block CSS is inlined by WP) and global-styles,
-	// whose content depends on the blocks present on the page.
 	next.querySelectorAll('style[id]').forEach((style) => {
+		const css = style.textContent;
 		const current = document.getElementById(style.id);
 
 		if (!current) {
 			const clone = document.createElement('style');
 			clone.id = style.id;
-			clone.textContent = style.textContent;
+			clone.textContent = css;
 			document.head.append(clone);
-		} else if (current.textContent !== style.textContent && current.textContent.length < style.textContent.length) {
-			current.textContent = style.textContent;
+			return;
 		}
+
+		const seen = appended.get(style.id) ?? new Set();
+		if (!css.trim() || current.textContent === css || seen.has(css)) return;
+
+		seen.add(css);
+		appended.set(style.id, seen);
+
+		const extra = document.createElement('style');
+		extra.dataset.syncOf = style.id;
+		extra.textContent = css;
+		current.after(extra); // Same place in the cascade as the original.
 	});
 
-	// Block view modules (viewScriptModule). They register in window.wpgBlocks once loaded.
 	next.querySelectorAll('script[type="module"][src][id]').forEach((script) => {
 		if (document.getElementById(script.id)) return;
 

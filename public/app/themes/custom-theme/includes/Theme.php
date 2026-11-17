@@ -25,10 +25,15 @@ final class Theme {
 		Core\Cleanup::class,
 		Core\Media::class,
 		Core\Assets::class,
+		Core\ContactLinks::class,
 		Editor\Blocks::class,
 		Editor\Editor::class,
-		Admin\Socials::class,
+		Admin\Contact::class,
+		Admin\Announcement::class,
+		Admin\Header::class,
+		Admin\Footer::class,
 		Fragments\Rest::class,
+		Forms\ContactForm::class,
 	);
 
 	/**

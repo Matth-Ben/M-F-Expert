@@ -1,15 +1,11 @@
 <?php
 /**
- * Panel fragment: menu (loaded via REST, see includes/Fragments).
- *
- * @var array{title?: string, menu_items?: array<int, array{url: string, title: string}>} $args
- *
- * @package WPGutenberg
+ * Mobile menu panel (loaded via the fragments REST endpoint).
  */
 
 $items = $args['menu_items'] ?? array();
 ?>
-<nav class="panel-menu" aria-label="<?php esc_attr_e( 'Panel menu', 'wp-gutenberg' ); ?>">
+<nav class="panel-menu" aria-label="<?php esc_attr_e( 'Main navigation', 'wp-gutenberg' ); ?>">
 	<div class="panel-menu__header">
 		<h2 class="panel-menu__title"><?php echo esc_html( $args['title'] ?? __( 'Menu', 'wp-gutenberg' ) ); ?></h2>
 	</div>
@@ -22,3 +18,8 @@ $items = $args['menu_items'] ?? array();
 		<?php endforeach; ?>
 	</ul>
 </nav>
+
+<a class="btn btn--primary mt-8 min-h-[3.375rem] w-full" href="<?php echo esc_url( wpg_phone_url() ); ?>">
+	<?php echo wpg_icon( 'phone' ); // phpcs:ignore -- escaped in helper. ?>
+	<?php esc_html_e( 'Call us', 'wp-gutenberg' ); ?>
+</a>

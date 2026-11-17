@@ -19,6 +19,11 @@ export const initParallax = () => {
     // Clean up previous animations
     cleanup();
 
+    // Reduced motion: no parallax.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     // Find all elements with data-parallax attribute
     const elements = document.querySelectorAll('[data-parallax]');
 

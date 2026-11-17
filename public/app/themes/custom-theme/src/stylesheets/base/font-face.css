@@ -1,10 +1,8 @@
-@layer base {
-  /* FT Kunst Grotesk Regular */
-  @font-face {
-    font-family: 'FT Kunst Grotesk';
-    src: url('../../fonts/ft-kunst-grotesk-regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-		font-display: swap;
-  }
-}
+/*
+ * Polices auto-hébergées (paquets @fontsource, servies par Vite) :
+ * DM Serif Display (titres), Montserrat variable 400–800 (texte), Caveat (script, en attendant Buffalo).
+ * Only latin subsets: the site is in French.
+ */
+@import "@fontsource/dm-serif-display/latin-400.css";
+@import "@fontsource-variable/montserrat/wght.css";
+@import "@fontsource/caveat/latin-500.css";

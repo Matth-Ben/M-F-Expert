@@ -10,6 +10,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 let lenis;
 
 export const initLenis = () => {
+    // Smooth (inertial) scrolling is motion: keep the native scroll when the visitor asks for less.
+    // Every helper below falls back to the native behaviour when `lenis` is undefined.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return null;
+    }
+
     lenis = new Lenis({
         lerp: 0.1,
         wheelMultiplier: 1,

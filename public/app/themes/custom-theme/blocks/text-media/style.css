@@ -1,0 +1,27 @@
+/*
+ * Texte + image — light section: bottom padding only, top padding after a coloured band
+ * (components/content.css, rule shared by the light sections).
+ * With a background colour (block supports) it becomes a band itself: padding on both sides.
+ */
+.wpg-text-media.has-background {
+	padding-block: var(--wp--preset--spacing--md);
+}
+
+.wpg-text-media__content > p {
+	max-width: 35rem;
+}
+
+/* Handwritten line (Caveat 31 → 38 px), set on a paragraph through its CSS class. */
+.wpg-text-media__content > p.wpg-signature {
+	font-family: var(--font-script, "Caveat", cursive);
+	font-size: 1.9375rem;
+	font-weight: 500;
+	line-height: 1.15;
+	color: var(--wp--preset--color--bordeaux);
+}
+
+@media (min-width: 64rem) {
+	.wpg-text-media__content > p.wpg-signature {
+		font-size: 2.375rem;
+	}
+}

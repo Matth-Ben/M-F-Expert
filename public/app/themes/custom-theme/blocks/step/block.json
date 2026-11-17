@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wpg/step",
+	"version": "1.0.0",
+	"title": "Étape",
+	"category": "wpg",
+	"icon": "marker",
+	"description": "Une étape numérotée automatiquement (dans un bloc Méthode en étapes).",
+	"textdomain": "wp-gutenberg",
+	"parent": ["wpg/steps"],
+	"attributes": {
+		"title": { "type": "string", "default": "" },
+		"text": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

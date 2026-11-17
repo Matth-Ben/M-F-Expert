@@ -87,6 +87,19 @@ final class Editor {
 			array( 'in_footer' => true )
 		);
 		wp_set_script_translations( 'wp-gutenberg-editor', WPG_TEXT_DOMAIN );
+
+		// Editor data shared with block edit.js (blocks/_shared/*): sprite URL for <Icon>, theme logo.
+		wp_add_inline_script(
+			'wp-gutenberg-editor',
+			'window.wpgEditor=' . wp_json_encode(
+				array(
+					'sprite'  => WPG_URI . '/public/sprite.svg',
+					'logo'    => wpg_logo_url( 'lg' ),
+					'contact' => wpg_contact(),
+				)
+			) . ';',
+			'before'
+		);
 	}
 
 	/**
